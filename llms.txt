@@ -2,11 +2,11 @@
 
 > Free, private, 100% client-side PDF toolkit running entirely inside the user's browser with zero server file uploads, no watermarks, and no registration.
 
-All 26 tools execute locally in browser memory using JavaScript and WebAssembly (`pdf-lib`, `PDF.js`, `jsPDF`, `Tesseract.js`, `Mammoth`, `SheetJS`, `marked`). Documents never leave the user's device.
+All 28 tools execute locally in browser memory using JavaScript and WebAssembly (`pdf-lib`, `PDF.js`, `jsPDF`, `Tesseract.js`, `Mammoth`, `SheetJS`, `marked`). Documents never leave the user's device.
 
 ## Core Pages
 
-- [GhostPDF Home](https://ghostpdf.tech/): Directory of all 26 free client-side PDF tools.
+- [GhostPDF Home](https://ghostpdf.tech/): Directory of all 28 free client-side PDF tools.
 - [GhostPDF Blog & Guides](https://ghostpdf.tech/blog/): 50 practical, step-by-step PDF tutorials, privacy playbooks, and troubleshooting guides.
 
 ## Organize, Edit & Sign Tools
@@ -15,6 +15,8 @@ All 26 tools execute locally in browser memory using JavaScript and WebAssembly 
 - [Split PDF](https://ghostpdf.tech/split-pdf/): Extract pages or split a PDF into separate documents without uploading.
 - [Rotate PDF](https://ghostpdf.tech/rotate-pdf/): Permanently rotate individual or all PDF pages 90, 180, or 270 degrees.
 - [Organize & Edit PDF](https://ghostpdf.tech/edit-pdf/): Reorder, crop, resize (A4/Letter), or delete PDF pages.
+- [Fill PDF Forms](https://ghostpdf.tech/fill-pdf/): Fill out interactive AcroForm fields or click to type text and checkmarks onto flat PDF forms.
+- [Annotate PDF](https://ghostpdf.tech/annotate-pdf/): Highlight passages, draw freehand ink, place sticky notes, boxes, and arrows on PDF pages.
 - [Crop PDF](https://ghostpdf.tech/crop-pdf/): Trim white margins and adjust PDF crop boxes visually.
 - [Pages per Sheet (N-up)](https://ghostpdf.tech/nup-pdf/): Impose 2, 4, or 6 PDF pages onto one sheet for handouts and printing.
 - [Watermark PDF](https://ghostpdf.tech/watermark-pdf/): Stamp custom text or transparent image/logo watermarks across pages.

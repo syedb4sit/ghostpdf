@@ -1,6 +1,6 @@
 # GhostPDF
 
-**Free, 100% client-side PDF toolkit — 26 browser-based tools with zero file uploads, no watermarks, and no registration.**
+**Free, 100% client-side PDF toolkit — 28 browser-based tools with zero file uploads, no watermarks, and no registration.**
 
 Live site: [ghostpdf.tech](https://ghostpdf.tech/) · Guides: [ghostpdf.tech/blog/](https://ghostpdf.tech/blog/)
 
@@ -14,13 +14,15 @@ Live site: [ghostpdf.tech](https://ghostpdf.tech/) · Guides: [ghostpdf.tech/blo
 
 ---
 
-## 26 Included Tools
+## 28 Included Tools
 
 ### Organize, Edit & Sign
 - **Merge PDF** (`/merge-pdf/`) — Combine multiple PDFs in custom drag-and-drop order.
 - **Split PDF** (`/split-pdf/`) — Extract specific pages or split documents into individual files.
 - **Rotate PDF** (`/rotate-pdf/`) — Permanently rotate individual or all pages.
 - **Organize & Edit PDF** (`/edit-pdf/`) — Reorder, crop, resize (A4 / US Letter), or delete pages.
+- **Fill PDF Forms** (`/fill-pdf/`) — Fill out interactive AcroForm fields or type text and checkmarks onto flat PDFs.
+- **Annotate PDF** (`/annotate-pdf/`) — Highlight passages, draw freehand ink, place sticky notes, boxes, and arrows.
 - **Crop PDF** (`/crop-pdf/`) — Trim white margins and adjust crop boxes visually.
 - **Pages per Sheet (N-up)** (`/nup-pdf/`) — Impose 2, 4, or 6 pages onto one sheet.
 - **Watermark PDF** (`/watermark-pdf/`) — Add custom text or transparent logo stamps.
