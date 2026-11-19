@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+
+    <!-- Primary Meta Tags -->
+    <title>Add Page Numbers to PDF Online Free | GhostPDF</title>
+    <meta name="title" content="Add Page Numbers to PDF Online Free | GhostPDF">
+    <meta name="description"
+        content="Add automatic sequential page numbers to PDF files online for free. Choose Page X, Page X of N, or - X -, custom corners or centered placement, 100% in your browser.">
+    <meta name="keywords"
+        content="add page numbers to pdf, pdf page numbers, number pdf pages online, bates numbering pdf free, page numbering pdf">
+    <meta name="author" content="GhostPDF">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ghostpdf.tech/page-numbers-pdf/">
+    <meta property="og:title" content="Add Page Numbers to PDF Online Free | GhostPDF">
+    <meta property="og:description" content="Insert custom page numbers anywhere on your PDF pages with live preview, 100% locally in your browser.">
+    <meta property="og:image" content="https://ghostpdf.tech/assets/android-chrome-512x512.png">
+
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://ghostpdf.tech/page-numbers-pdf/">
+    <meta property="twitter:title" content="Add Page Numbers to PDF Online Free">
+    <meta property="twitter:description" content="Add sequential page numbers to PDFs free inside your browser.">
+    <meta name="twitter:image" content="https://ghostpdf.tech/assets/android-chrome-512x512.png">
+
+    <link rel="canonical" href="https://ghostpdf.tech/page-numbers-pdf/">
+    <link rel="icon" href="../assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="96x96" href="../assets/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
+    <link rel="manifest" href="../assets/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"></noscript>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"></noscript>
+
+    <!-- Libraries -->
+    <script defer src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+    <style>
+        .preview-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-sm);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+            overflow: auto;
+        }
+
+        .preview-wrapper {
+            position: relative;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .interactive-element {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px dashed hsl(var(--primary));
+            cursor: move;
+            user-select: none;
+            min-width: 50px;
+            min-height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .interactive-content {
+            pointer-events: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        .resize-handle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: hsl(var(--primary));
+            border-radius: 50%;
+            bottom: -5px;
+            right: -5px;
+            cursor: nwse-resize;
+        }
+
+        #pdf-canvas {
+            display: block;
+            max-width: 100%;
+        }
+
+        .control-group {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            padding: 1.5rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .control-group h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 0.5rem;
+        }
+
+        .input-wrapper {
+            margin-bottom: 1rem;
+        }
+
+        .input-wrapper label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
+            color: hsl(var(--text-muted));
+        }
+
+        .input-wrapper input[type="text"],
+        .input-wrapper input[type="number"],
+        .input-wrapper select {
+            width: 100%;
+            padding: 0.6rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-sm);
+            color: hsl(var(--text-main));
+        }
+
+        .input-wrapper input[type="range"] {
+            width: 100%;
+        }
+
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            color: hsl(var(--text-main));
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: hsl(var(--primary));
+            color: white;
+            border-color: hsl(var(--primary));
+        }
+
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .layout-grid {
+                display: flex;
+                flex-direction: column-reverse;
+            }
+
+            .controls-sidebar {
+                width: 100%;
+            }
+
+            .preview-container {
+                min-height: 300px;
+            }
+        }
+
+        .rotate-handle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: hsl(var(--primary));
+            border-radius: 50%;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            cursor: grab;
+        }
+
+        .rotate-stem {
+            position: absolute;
+            width: 2px;
+            height: 20px;
+            background: hsl(var(--primary));
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+
+        .file-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--glass-border);
+        }
+
+        .file-name {
+            font-size: 1.1rem;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin: 0;
+            color: hsl(var(--text-main));
+        }
+
+        .reset-btn {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            color: #ff6b6b;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .reset-btn:hover {
+            background: rgba(255, 107, 107, 0.2);
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 600px) {
+            .file-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .reset-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="container">
+            <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1" />
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/page-numbers-pdf/">
+                        <span itemprop="name">Add Page Numbers</span>
+                    </a>
+                    <meta itemprop="position" content="2" />
+                </li>
+            </ol>
+        </div>
+    </nav>
+
+    <nav class="navbar">
+        <a href="../" class="logo">
+            <img src="../assets/favicon-96x96.png" alt="GhostPDF logo" width="34" height="34" decoding="async"> GhostPDF
+        </a>
+        <div class="nav-links">
+            <a href="../">All Tools</a>
+            <a href="./" class="active">Page Numbers</a>
+        </div>
+    </nav>
+
+    <button id="theme-toggle" class="theme-ribbon-toggle" aria-label="Toggle dark mode">
+        <span class="ribbon-sun-wrapper">
+            <svg class="ribbon-sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+        </span>
+        <span class="ribbon-bookmark">
+            <svg class="ribbon-moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </span>
+    </button>
+
+    <main class="container">
+        <header style="text-align: center; margin-bottom: 3rem;">
+            <h1><span class="text-gradient">Add Page Numbers</span> to PDF</h1>
+            <p style="color: hsl(var(--text-muted)); margin-top: 0.5rem;">Stamp clean, consistent sequential page numbers across every page locally in your browser.</p>
+        </header>
+
+        <!-- Step 1: Upload -->
+        <div id="upload-stage" class="glass-card" style="max-width: 600px; margin: 0 auto;">
+            <div id="drop-zone" class="drop-zone">
+                <i class="fa-solid fa-list-ol"></i>
+                <div class="drop-text">Drag & Drop your PDF file here <br> or click to browse</div>
+            </div>
+            <input type="file" id="file-input" accept="application/pdf" hidden>
+        </div>
+
+        <!-- Step 2: Edit -->
+        <div id="edit-stage" style="display: none;">
+            <div class="glass-card" style="padding: 2rem;">
+                <div class="file-header">
+                    <h2 id="file-name-display" class="file-name">filename.pdf</h2>
+                    <button onclick="resetFile()" class="reset-btn">
+                        <i class="fa-solid fa-trash"></i> Reset
+                    </button>
+                </div>
+
+                <div class="layout-grid">
+                    <!-- Preview Area -->
+                    <div class="preview-container">
+                        <div class="preview-wrapper" id="preview-wrapper">
+                            <canvas id="pdf-canvas"></canvas>
+                            <div id="watermark-overlay" class="interactive-element" style="display: none;">
+                                <div id="overlay-content" class="interactive-content"></div>
+                                <div class="resize-handle" id="resize-handle"></div>
+                                <div class="rotate-stem"></div>
+                                <div class="rotate-handle" id="rotate-handle"></div>
+                            </div>
+                        </div>
+                        <p style="margin-top: 1rem; color: hsl(var(--text-muted)); font-size: 0.9rem;">Live Page 1 preview — change format, position, or starting number on the right.</p>
+                    </div>
+
+                    <!-- Controls Sidebar -->
+                    <div class="controls-sidebar">
+
+                        <!-- Page Number Controls (Default Active) -->
+                        <div id="numbers-controls" class="control-group" style="display: block;">
+                            <h3>Page Number Settings</h3>
+                            <div class="input-wrapper">
+                                <label for="pn-format">Number Format</label>
+                                <select id="pn-format">
+                                    <option value="simple">Page X</option>
+                                    <option value="of">Page X of N</option>
+                                    <option value="dash">- X -</option>
+                                </select>
+                            </div>
+                            <div class="input-wrapper">
+                                <label for="pn-position">Position on Page</label>
+                                <select id="pn-position">
+                                    <option value="bottom-center">Bottom Center</option>
+                                    <option value="bottom-right">Bottom Right</option>
+                                    <option value="bottom-left">Bottom Left</option>
+                                    <option value="top-center">Top Center</option>
+                                    <option value="top-right">Top Right</option>
+                                    <option value="top-left">Top Left</option>
+                                </select>
+                            </div>
+                            <div class="input-wrapper">
+                                <label for="pn-start">Start Numbering From</label>
+                                <input type="number" id="pn-start" value="1" min="1">
+                            </div>
+                        </div>
+
+                        <!-- Text Controls -->
+                        <div id="text-controls" class="control-group" style="display: none;">
+                            <h3>Text Settings</h3>
+                            <div class="input-wrapper">
+                                <label>Watermark Text</label>
+                                <input type="text" id="wm-text" value="CONFIDENTIAL">
+                            </div>
+                            <div class="input-wrapper">
+                                <label>Font Size</label>
+                                <input type="number" id="wm-size" value="50" min="10" max="200">
+                            </div>
+                            <div class="input-wrapper">
+                                <label>Opacity</label>
+                                <input type="range" id="wm-opacity" min="0" max="1" step="0.1" value="0.5">
+                            </div>
+                            <div class="input-wrapper">
+                                <label>Rotation</label>
+                                <input type="range" id="wm-rotation" min="-180" max="180" value="45">
+                            </div>
+                            <div class="input-wrapper">
+                                <label>Color</label>
+                                <input type="color" id="wm-color" value="#ff0000" style="width: 100%; height: 40px;">
+                            </div>
+                        </div>
+
+                        <!-- Image Controls -->
+                        <div id="image-controls" class="control-group" style="display: none;">
+                            <h3>Image Settings</h3>
+                            <div class="input-wrapper">
+                                <label>Upload Image</label>
+                                <label for="wm-image-input" class="btn"
+                                    style="display: block; text-align: center; cursor: pointer; background: rgba(255,255,255,0.05); border: 1px dashed var(--glass-border);">
+                                    <i class="fa-solid fa-image"></i> Choose Image
+                                </label>
+                                <input type="file" id="wm-image-input" accept="image/*" style="display: none;">
+                            </div>
+                            <div class="input-wrapper">
+                                <label>Opacity</label>
+                                <input type="range" id="wm-image-opacity" min="0" max="1" step="0.1" value="0.5">
+                            </div>
+                            <div class="input-wrapper">
+                                <label>Rotation</label>
+                                <input type="range" id="wm-image-rotation" min="-180" max="180" value="0">
+                            </div>
+                        </div>
+
+                        <div style="display: grid; gap: 1rem; margin-top: 1.5rem;">
+                            <button id="preview-full-btn" class="btn"
+                                style="background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); width: 100%;">
+                                <i class="fa-solid fa-eye"></i> Apply &amp; Preview Whole PDF
+                            </button>
+                            <button id="process-btn" class="btn btn-primary" style="width: 100%;">
+                                Add Page Numbers &amp; Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- How to Use Section -->
+        <section class="container" style="margin-top: 4rem; max-width: 800px;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">How to Add Page Numbers to a PDF</h2>
+            <div class="steps" style="display: grid; gap: 1.5rem;">
+                <div class="step-card glass-card">
+                    <h3>1. Select Your PDF</h3>
+                    <p>Drag and drop any multi-page PDF document above to open Page 1 with live page number preview.</p>
+                </div>
+                <div class="step-card glass-card">
+                    <h3>2. Pick Format, Position &amp; Start Number</h3>
+                    <p>Choose between "Page X", "Page X of N", or "- X -", pick top or bottom alignment (left, center, right), and set your starting page number.</p>
+                </div>
+                <div class="step-card glass-card">
+                    <h3>3. Preview &amp; Download</h3>
+                    <p>Inspect every page using "Apply &amp; Preview Whole PDF" or click download to save your numbered PDF locally.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="container" style="margin-top: 4rem; max-width: 800px; padding-bottom: 4rem;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Frequently Asked Questions</h2>
+            <div class="faq-accordion">
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="pn-faq-1">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            What page numbering styles are supported?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="pn-faq-1" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">You can choose between <code>Page X</code>, <code>Page X of N</code> (with total page count), and minimalist <code>- X -</code> formatting.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="pn-faq-2">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Can I start numbering from a number other than 1?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="pn-faq-2" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Yes! Change "Start Numbering From" to any integer (for example starting a merged report appendix at page 5 or 11).</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="pn-faq-3">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Where can page numbers be placed on the PDF?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="pn-faq-3" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Place numbers cleanly in the Bottom Center, Bottom Right, Bottom Left, Top Center, Top Right, or Top Left margin of every page.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="pn-faq-4">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Does numbering a PDF upload my file to any server?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="pn-faq-4" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">No. GhostPDF renders and stamps crisp vector text directly inside your browser using PDF-Lib and PDF.js with zero file uploads.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="pn-faq-5">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Can I combine PDFs or rotate pages before adding numbers?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="pn-faq-5" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Yes! Combine sections first in <a href="../merge-pdf/" style="color: hsl(var(--primary)); text-decoration: underline;">Merge PDF</a> or fix orientation in <a href="../rotate-pdf/" style="color: hsl(var(--primary)); text-decoration: underline;">Rotate PDF</a>, then stamp continuous page numbers here.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Tools Section -->
+        <section class="container" style="margin-top: 4rem; max-width: 800px; padding-bottom: 2rem;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">More PDF Tools</h2>
+            <div class="grid-tools"
+                style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+                <a href="../watermark-pdf/" class="glass-card" style="padding: 1.5rem;">
+                    <i class="fa-solid fa-stamp"
+                        style="font-size: 1.5rem; color: hsl(var(--primary)); margin-bottom: 0.5rem;"></i>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0;">Watermark PDF</h3>
+                </a>
+                <a href="../merge-pdf/" class="glass-card" style="padding: 1.5rem;">
+                    <i class="fa-solid fa-object-group"
+                        style="font-size: 1.5rem; color: hsl(var(--primary)); margin-bottom: 0.5rem;"></i>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0;">Merge PDF</h3>
+                </a>
+                <a href="../rotate-pdf/" class="glass-card" style="padding: 1.5rem;">
+                    <i class="fa-solid fa-rotate-right"
+                        style="font-size: 1.5rem; color: hsl(var(--primary)); margin-bottom: 0.5rem;"></i>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0;">Rotate PDF</h3>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- PDF Preview Modal -->
+    <div id="preview-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h3>PDF Preview</h3>
+                <button onclick="closePreviewModal()" class="close-btn"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <iframe id="preview-frame" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal-content {
+            width: 100%;
+            max-width: 1000px;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            background: hsl(var(--bg-card));
+            border: 1px solid var(--glass-border);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .modal-body {
+            flex: 1;
+            background: #333;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: hsl(var(--text-main));
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .close-btn:hover {
+            color: #ff6b6b;
+        }
+    </style>
+
+    <footer class="seo-footer">
+        <div class="seo-footer-grid">
+            <div class="seo-footer-brand">
+                <h3>GhostPDF</h3>
+                <p>Free, private, browser-based PDF tools with zero file uploads, no watermarks, and no registration required. All 26 tools process files locally on your device.</p>
+                <p style="margin-top:0.75rem;"><a href="../blog/" style="color:hsl(var(--primary));font-weight:600;text-decoration:none;">Explore 50 PDF Guides &rarr;</a></p>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Organize, Edit &amp; Sign</h4>
+                <ul>
+                    <li><a href="../merge-pdf/">Merge PDF</a></li>
+                    <li><a href="../split-pdf/">Split PDF</a></li>
+                    <li><a href="../rotate-pdf/">Rotate PDF</a></li>
+                    <li><a href="../edit-pdf/">Organize & Edit PDF</a></li>
+                    <li><a href="../crop-pdf/">Crop PDF</a></li>
+                    <li><a href="../nup-pdf/">Pages per Sheet</a></li>
+                    <li><a href="../watermark-pdf/">Watermark PDF</a></li>
+                    <li><a href="../page-numbers-pdf/">Page Numbers</a></li>
+                    <li><a href="../sign-pdf/">Sign PDF</a></li>
+                </ul>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Convert &amp; Extract</h4>
+                <ul>
+                    <li><a href="../image-to-pdf/">Image to PDF</a></li>
+                    <li><a href="../pdf-to-image/">PDF to Image</a></li>
+                    <li><a href="../extract-images/">Extract Images</a></li>
+                    <li><a href="../word-to-pdf/">Word to PDF</a></li>
+                    <li><a href="../pdf-to-word/">PDF to Word</a></li>
+                    <li><a href="../excel-to-pdf/">Excel / CSV to PDF</a></li>
+                    <li><a href="../html-to-pdf/">HTML / MD to PDF</a></li>
+                    <li><a href="../pdf-to-markdown/">PDF to Markdown</a></li>
+                    <li><a href="../pdf-ocr/">PDF OCR</a></li>
+                </ul>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Security &amp; Optimize</h4>
+                <ul>
+                    <li><a href="../redact-pdf/">Redact PDF</a></li>
+                    <li><a href="../lock-pdf/">Lock PDF</a></li>
+                    <li><a href="../unlock-pdf/">Unlock PDF</a></li>
+                    <li><a href="../flatten-pdf/">Flatten PDF</a></li>
+                    <li><a href="../pdf-metadata/">PDF Metadata</a></li>
+                    <li><a href="../compare-pdf/">Compare PDF</a></li>
+                    <li><a href="../compress-pdf/">Compress PDF</a></li>
+                    <li><a href="../grayscale-pdf/">Grayscale / Invert PDF</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="seo-footer-bottom">
+            <p>&copy; 2026 GhostPDF. 100% Client-Side, Free &amp; Private PDF Tools.</p>
+        </div>
+    </footer>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "GhostPDF Add Page Numbers Tool",
+      "description": "Add sequential page numbers (Page X, Page X of N, or - X -) to any corner or centered margin of your PDF free in your browser.",
+      "url": "https://ghostpdf.tech/page-numbers-pdf/",
+      "applicationCategory": "Productivity",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What page numbering styles are supported?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can choose between Page X, Page X of N (with total page count), and minimalist - X - formatting."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I start numbering from a number other than 1?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Change Start Numbering From to any integer (for example starting a merged report appendix at page 5 or 11)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where can page numbers be placed on the PDF?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Place numbers cleanly in the Bottom Center, Bottom Right, Bottom Left, Top Center, Top Right, or Top Left margin of every page."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does numbering a PDF upload my file to any server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. GhostPDF renders and stamps crisp vector text directly inside your browser using PDF-Lib and PDF.js with zero file uploads."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I combine PDFs or rotate pages before adding numbers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Combine sections first in Merge PDF or fix orientation in Rotate PDF, then stamp continuous page numbers here."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <script defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script defer src="../js/utils.js"></script>
+    <script defer src="../watermark-pdf/watermark.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+
+    <!-- Primary Meta Tags -->
+    <title>PDF to Word Converter Free Online (PDF to DOCX) | GhostPDF</title>
+    <meta name="title" content="PDF to Word Converter Free Online (PDF to DOCX) | GhostPDF">
+    <meta name="description"
+        content="Convert PDF to editable Word (DOCX) online for free directly in your browser. Zero file uploads, 100% private client-side conversion with no registration.">
+    <meta name="keywords"
+        content="pdf to word, convert pdf to word, pdf to docx, pdf to word converter free, client side pdf to word">
+    <meta name="author" content="GhostPDF">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ghostpdf.tech/pdf-to-word/">
+    <meta property="og:title" content="PDF to Word Converter Free Online | GhostPDF">
+    <meta property="og:description" content="Convert PDF documents into editable Word (.docx) files with layout and table fidelity.">
+    <meta property="og:image" content="https://ghostpdf.tech/assets/android-chrome-512x512.png">
+
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://ghostpdf.tech/pdf-to-word/">
+    <meta property="twitter:title" content="PDF to Word Converter Free Online">
+    <meta property="twitter:description" content="Turn PDFs into editable Word DOCX files quickly and securely.">
+    <meta name="twitter:image" content="https://ghostpdf.tech/assets/android-chrome-512x512.png">
+
+    <link rel="canonical" href="https://ghostpdf.tech/pdf-to-word/">
+    <link rel="icon" href="../assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="96x96" href="../assets/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
+    <link rel="manifest" href="../assets/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"></noscript>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"></noscript>
+
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/docx@8.5.0/build/index.umd.js"></script>
+</head>
+
+<body>
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="container">
+            <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1" />
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/pdf-to-word/">
+                        <span itemprop="name">PDF to Word</span>
+                    </a>
+                    <meta itemprop="position" content="2" />
+                </li>
+            </ol>
+        </div>
+    </nav>
+
+    <nav class="navbar">
+        <a href="../" class="logo">
+            <img src="../assets/favicon-96x96.png" alt="GhostPDF logo" width="34" height="34" decoding="async"> GhostPDF
+        </a>
+        <div class="nav-links">
+            <a href="../">All Tools</a>
+            <a href="./" class="active">PDF to Word</a>
+        </div>
+    </nav>
+
+    <button id="theme-toggle" class="theme-ribbon-toggle" aria-label="Toggle dark mode">
+        <span class="ribbon-sun-wrapper">
+            <svg class="ribbon-sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+        </span>
+        <span class="ribbon-bookmark">
+            <svg class="ribbon-moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </span>
+    </button>
+
+    <main class="container">
+        <header style="text-align: center; margin-bottom: 3rem;">
+            <h1><span class="text-gradient">PDF to Word</span> Converter</h1>
+            <p style="color: hsl(var(--text-muted)); margin-top: 0.5rem;">Convert PDF files into editable Microsoft Word (.docx) documents while preserving headings, lists, and tables.</p>
+        </header>
+
+        <div class="glass-card" style="max-width: 640px; margin: 0 auto;">
+            <div id="drop-zone" class="drop-zone">
+                <i id="drop-icon" class="fa-solid fa-file-word"></i>
+                <div id="drop-text" class="drop-text">Drag & Drop your PDF file here <br> or click to browse</div>
+            </div>
+            <input type="file" id="file-input"
+                accept="application/pdf,.pdf"
+                hidden>
+
+            <div id="convert-stage" style="display: none; width: 100%; text-align: left;">
+                <div class="file-info"
+                    style="margin-bottom: 1.5rem; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 1rem; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: space-between;">
+                    <div style="flex: 1; min-width: 0; margin-right: 1rem;">
+                        <h4 id="file-name" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            document.pdf</h4>
+                        <span id="file-size" style="color: hsl(var(--text-muted)); font-size: 0.9rem;">0 MB</span>
+                        <div style="margin-top: 0.5rem;">
+                            <span id="detected-flow" class="status-pill">Detected: PDF → Word (.docx)</span>
+                        </div>
+                    </div>
+                    <button onclick="resetFile()" title="Remove file"
+                        style="background:none; border:none; color: #ff6b6b; cursor: pointer; padding: 0.5rem;">
+                        <i class="fa-solid fa-xmark fa-lg"></i>
+                    </button>
+                </div>
+
+                <div id="progress-container" style="display: none; margin-bottom: 1.5rem;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
+                        <i id="progress-icon" class="fa-solid fa-file-import"
+                            style="font-size: 1.2rem; color: hsl(var(--primary));"></i>
+                        <span id="progress-text" style="font-size: 0.9rem; font-weight: 500;">Reading PDF...</span>
+                        <span id="progress-percent"
+                            style="margin-left: auto; font-size: 0.85rem; color: hsl(var(--text-muted)); font-weight: 600;">0%</span>
+                    </div>
+                    <div
+                        style="background: rgba(255,255,255,0.1); border-radius: 999px; height: 8px; overflow: hidden;">
+                        <div id="progress-bar"
+                            style="height: 100%; width: 0%; background: linear-gradient(90deg, hsl(var(--primary)), #ff6b6b); border-radius: 999px; transition: width 0.3s ease;">
+                        </div>
+                    </div>
+                    <div id="progress-stages"
+                        style="display: flex; justify-content: space-between; margin-top: 0.5rem; font-size: 0.75rem; color: hsl(var(--text-muted));">
+                        <span id="stage-upload" style="font-weight: 600; color: hsl(var(--primary));">Reading</span>
+                        <span id="stage-process">Extracting</span>
+                        <span id="stage-download">Download</span>
+                    </div>
+                </div>
+
+                <button id="convert-btn" class="btn btn-primary" style="width: 100%;">Convert to Word</button>
+            </div>
+        </div>
+
+        <!-- How to Use Section -->
+        <section class="container" style="margin-top: 4rem; max-width: 800px;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">How to Convert PDF to Word</h2>
+            <div class="steps" style="display: grid; gap: 1.5rem;">
+                <div class="step-card glass-card">
+                    <h3>1. Upload Your PDF</h3>
+                    <p>Drag and drop any PDF file into the converter box above or click to select from your device.</p>
+                </div>
+                <div class="step-card glass-card">
+                    <h3>2. Reconstruct Editable Layout</h3>
+                    <p>Click "Convert to Word" to parse paragraphs, fonts, columns, and tables into native Word elements.</p>
+                </div>
+                <div class="step-card glass-card">
+                    <h3>3. Download DOCX</h3>
+                    <p>Your editable <code>.docx</code> file downloads automatically and opens cleanly in Microsoft Word, Google Docs, or LibreOffice.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="container" style="margin-top: 4rem; max-width: 800px; padding-bottom: 4rem;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Frequently Asked Questions</h2>
+            <div class="faq-accordion">
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="p2w-faq-1">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Will the converted Word document remain fully editable?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="p2w-faq-1" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Yes. Paragraphs, headings, lists, and tables are reconstructed as editable Word text and objects rather than flattened screenshots.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="p2w-faq-2">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Are my PDFs uploaded to any server?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="p2w-faq-2" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">No. GhostPDF converts PDFs to Word 100% locally in your browser. Your documents never leave your device or touch any external server.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="p2w-faq-3">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Can I convert Word documents back to PDF too?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="p2w-faq-3" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Yes! Use our dedicated <a href="../word-to-pdf/" style="color: hsl(var(--primary)); text-decoration: underline;">Word to PDF converter</a> anytime to convert DOCX files back to PDF in your browser.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="p2w-faq-4">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Does PDF to Word work on scanned PDFs?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="p2w-faq-4" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Browser-based extraction works on PDFs with selectable text and automatically preserves headings and paragraphs. Scanned image-only PDFs without an embedded text layer require OCR first.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="p2w-faq-5">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Is this PDF to Word converter free without email signup?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="p2w-faq-5" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Yes, GhostPDF is 100% free with no account registration, email walls, or watermarks on your exported Word files.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Tools Section -->
+        <section class="container" style="margin-top: 4rem; max-width: 800px; padding-bottom: 2rem;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">More PDF Tools</h2>
+            <div class="grid-tools"
+                style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+                <a href="../word-to-pdf/" class="glass-card" style="padding: 1.5rem;">
+                    <i class="fa-solid fa-file-pdf"
+                        style="font-size: 1.5rem; color: hsl(var(--primary)); margin-bottom: 0.5rem;"></i>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0;">Word to PDF</h3>
+                </a>
+                <a href="../compress-pdf/" class="glass-card" style="padding: 1.5rem;">
+                    <i class="fa-solid fa-minimize"
+                        style="font-size: 1.5rem; color: hsl(var(--primary)); margin-bottom: 0.5rem;"></i>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0;">Compress PDF</h3>
+                </a>
+                <a href="../edit-pdf/" class="glass-card" style="padding: 1.5rem;">
+                    <i class="fa-solid fa-pen-to-square"
+                        style="font-size: 1.5rem; color: hsl(var(--primary)); margin-bottom: 0.5rem;"></i>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0;">Organize PDF</h3>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="seo-footer">
+        <div class="seo-footer-grid">
+            <div class="seo-footer-brand">
+                <h3>GhostPDF</h3>
+                <p>Free, private, browser-based PDF tools with zero file uploads, no watermarks, and no registration required. All 26 tools process files locally on your device.</p>
+                <p style="margin-top:0.75rem;"><a href="../blog/" style="color:hsl(var(--primary));font-weight:600;text-decoration:none;">Explore 50 PDF Guides &rarr;</a></p>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Organize, Edit &amp; Sign</h4>
+                <ul>
+                    <li><a href="../merge-pdf/">Merge PDF</a></li>
+                    <li><a href="../split-pdf/">Split PDF</a></li>
+                    <li><a href="../rotate-pdf/">Rotate PDF</a></li>
+                    <li><a href="../edit-pdf/">Organize & Edit PDF</a></li>
+                    <li><a href="../crop-pdf/">Crop PDF</a></li>
+                    <li><a href="../nup-pdf/">Pages per Sheet</a></li>
+                    <li><a href="../watermark-pdf/">Watermark PDF</a></li>
+                    <li><a href="../page-numbers-pdf/">Page Numbers</a></li>
+                    <li><a href="../sign-pdf/">Sign PDF</a></li>
+                </ul>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Convert &amp; Extract</h4>
+                <ul>
+                    <li><a href="../image-to-pdf/">Image to PDF</a></li>
+                    <li><a href="../pdf-to-image/">PDF to Image</a></li>
+                    <li><a href="../extract-images/">Extract Images</a></li>
+                    <li><a href="../word-to-pdf/">Word to PDF</a></li>
+                    <li><a href="../pdf-to-word/">PDF to Word</a></li>
+                    <li><a href="../excel-to-pdf/">Excel / CSV to PDF</a></li>
+                    <li><a href="../html-to-pdf/">HTML / MD to PDF</a></li>
+                    <li><a href="../pdf-to-markdown/">PDF to Markdown</a></li>
+                    <li><a href="../pdf-ocr/">PDF OCR</a></li>
+                </ul>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Security &amp; Optimize</h4>
+                <ul>
+                    <li><a href="../redact-pdf/">Redact PDF</a></li>
+                    <li><a href="../lock-pdf/">Lock PDF</a></li>
+                    <li><a href="../unlock-pdf/">Unlock PDF</a></li>
+                    <li><a href="../flatten-pdf/">Flatten PDF</a></li>
+                    <li><a href="../pdf-metadata/">PDF Metadata</a></li>
+                    <li><a href="../compare-pdf/">Compare PDF</a></li>
+                    <li><a href="../compress-pdf/">Compress PDF</a></li>
+                    <li><a href="../grayscale-pdf/">Grayscale / Invert PDF</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="seo-footer-bottom">
+            <p>&copy; 2026 GhostPDF. 100% Client-Side, Free &amp; Private PDF Tools.</p>
+        </div>
+    </footer>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "GhostPDF PDF to Word Converter",
+      "description": "Convert PDF documents into editable Word (.docx) files online for free while preserving headings, lists, and tables.",
+      "url": "https://ghostpdf.tech/pdf-to-word/",
+      "applicationCategory": "Productivity",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Will the converted Word document remain fully editable?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Paragraphs, headings, lists, and tables are reconstructed as editable Word text and objects rather than flattened screenshots."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are my PDFs uploaded to any server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. GhostPDF converts PDFs to Word 100% locally in your browser. Your documents never leave your device or touch any external server."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I convert Word documents back to PDF too?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Use our dedicated Word to PDF converter anytime to convert DOCX files back to PDF in your browser."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does PDF to Word work on scanned PDFs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Browser-based extraction works on PDFs with selectable text and automatically preserves headings and paragraphs. Scanned image-only PDFs without an embedded text layer require OCR first."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this PDF to Word converter free without email signup?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, GhostPDF is 100% free with no account registration, email walls, or watermarks on your exported Word files."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <script defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script defer src="../js/utils.js"></script>
+    <script defer src="../word-pdf/word-pdf.js"></script>
+</body>
+
+</html>

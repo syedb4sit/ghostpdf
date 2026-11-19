@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+
+    <!-- Primary Meta Tags -->
+    <title>Organize & Edit PDF Online – Reorder, Crop, Resize, Delete | GhostPDF</title>
+    <meta name="title" content="Organize & Edit PDF Online – Reorder, Crop, Resize, Delete Free | GhostPDF">
+    <meta name="description"
+        content="Organize and edit PDF pages online. Reorder pages, crop margins, resize to A4 or US Letter, and delete unwanted pages free in your browser.">
+    <meta name="keywords" content="edit PDF, organize PDF, crop PDF margins, reorder PDF pages, delete PDF pages, resize PDF to A4">
+    <meta name="author" content="GhostPDF">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ghostpdf.tech/edit-pdf/">
+    <meta property="og:title" content="Organize & Edit PDF Online">
+    <meta property="og:description" content="Reorder, crop margins, resize, and delete PDF pages online for free.">
+    <meta property="og:image" content="https://ghostpdf.tech/assets/android-chrome-512x512.png">
+
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://ghostpdf.tech/edit-pdf/">
+    <meta property="twitter:title" content="Organize & Edit PDF Online">
+    <meta property="twitter:description" content="Reorder, crop, resize, and delete PDF pages online.">
+    <meta name="twitter:image" content="https://ghostpdf.tech/assets/android-chrome-512x512.png">
+
+    <link rel="canonical" href="https://ghostpdf.tech/edit-pdf/">
+    <link rel="icon" href="../assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="96x96" href="../assets/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
+    <link rel="manifest" href="../assets/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"></noscript>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"></noscript>
+
+    <!-- Libraries -->
+    <script defer src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script defer src="https://unpkg.com/@pdf-lib/fontkit@1.1.1/dist/fontkit.umd.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
+</head>
+
+<body>
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="container">
+            <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1" />
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/edit-pdf/">
+                        <span itemprop="name">Edit PDF</span>
+                    </a>
+                    <meta itemprop="position" content="2" />
+                </li>
+            </ol>
+        </div>
+    </nav>
+
+    <nav class="navbar">
+        <a href="../" class="logo">
+            <img src="../assets/favicon-96x96.png" alt="GhostPDF logo" width="34" height="34" decoding="async"> GhostPDF
+        </a>
+        <div class="nav-links">
+            <a href="../">All Tools</a>
+            <a href="./" class="active">Organize PDF</a>
+        </div>
+    </nav>
+
+    <button id="theme-toggle" class="theme-ribbon-toggle" aria-label="Toggle dark mode">
+        <span class="ribbon-sun-wrapper">
+            <svg class="ribbon-sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+        </span>
+        <span class="ribbon-bookmark">
+            <svg class="ribbon-moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </span>
+    </button>
+
+    <main class="container">
+        <header style="text-align: center; margin-bottom: 3rem;">
+            <h1><span class="text-gradient">Organize & Edit PDF</span> Online</h1>
+            <p style="color: hsl(var(--text-muted)); margin-top: 0.5rem;">Reorder, Crop margins, Resize to A4/Letter, and Delete pages in your PDF.
+            </p>
+        </header>
+
+        <div class="glass-card"
+            style="max-width: 900px; width: 100%; margin: 0 auto; text-align: left;">
+
+            <div id="drop-zone" class="drop-zone">
+                <i class="fa-solid fa-file-pdf"></i>
+                <div class="drop-text">Drag & Drop PDF file here <br> or click to browse</div>
+            </div>
+            <input type="file" id="file-input" accept="application/pdf" hidden>
+
+            <div id="editor-stage" style="display: none;">
+                <div class="toolbar"
+                    style="display: flex; gap: 1rem; margin-bottom: 2rem; justify-content: center; flex-wrap: wrap;">
+
+                    <!-- PDF Settings (Copied from Image-to-PDF) -->
+                    <div class="pdf-settings"
+                        style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; align-items: center; background: rgba(255, 255, 255, 0.05); padding: 0.5rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--glass-border);">
+                        <div class="form-group">
+                            <label
+                                style="display: block; font-size: 0.8rem; color: hsl(var(--text-muted)); margin-bottom: 0.3rem;">Page
+                                Size</label>
+                            <select id="page-size"
+                                style="padding: 0.5rem; border-radius: 4px; border: 1px solid var(--glass-border); background: hsl(var(--bg-card)); color: hsl(var(--text-main));">
+                                <option value="fit" selected>Keep Original Size (Lossless)</option>
+                                <option value="a4">A4 (210 x 297 mm)</option>
+                                <option value="letter">Letter (8.5 x 11 in)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label
+                                style="display: block; font-size: 0.8rem; color: hsl(var(--text-muted)); margin-bottom: 0.3rem;">Layout</label>
+                            <select id="page-layout"
+                                style="padding: 0.5rem; border-radius: 4px; border: 1px solid var(--glass-border); background: hsl(var(--bg-card)); color: hsl(var(--text-main));">
+                                <option value="auto" selected>Auto (Match Page)</option>
+                                <option value="portrait">Portrait</option>
+                                <option value="landscape">Landscape</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button id="save-pdf-btn" class="btn btn-primary">Save PDF</button>
+                </div>
+
+                <!-- Scrollable Pages Grid Container -->
+                <div id="grid-container"
+                    style="max-height: 500px; overflow-y: auto; margin-bottom: 1rem; padding-right: 0.5rem; border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-sm); max-width: 80%; margin: 0 auto 1rem auto;">
+                    <div id="pages-grid" class="image-grid" style="display: none; padding: 1rem;">
+                        <!-- Pages Injected Here -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- How to Use Section -->
+        <section class="container" style="margin-top: 4rem; max-width: 800px;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">How to Edit PDF Pages</h2>
+            <div class="steps" style="display: grid; gap: 1.5rem;">
+                <div class="step-card glass-card">
+                    <h3>1. Upload PDF</h3>
+                    <p>Select your file. We will render thumbnails of all pages.</p>
+                </div>
+                <div class="step-card glass-card">
+                    <h3>2. Organize, Crop &amp; Delete</h3>
+                    <p>Drag pages or use arrow buttons to reorder, open the crop tool to trim margins, or delete
+                        unwanted pages.</p>
+                </div>
+                <div class="step-card glass-card">
+                    <h3>3. Save</h3>
+                    <p>Choose to keep original vector dimensions or resize to A4 / US Letter, then download instantly.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="container" style="margin-top: 4rem; max-width: 800px; padding-bottom: 4rem;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Frequently Asked Questions</h2>
+            <div class="faq-accordion">
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="edit-faq-1">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Does reordering or deleting pages keep original text quality?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="edit-faq-1" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Yes! Unless you explicitly crop a page, GhostPDF
+                            copies and rearranges your original vector PDF pages losslessly so selectable text and fonts
+                            remain razor sharp.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="edit-faq-2">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Can I delete individual pages from a PDF?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="edit-faq-2" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Yes. Click the trash icon on any page card to remove
+                            it before saving (at least one page must remain in the exported document).</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="edit-faq-3">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            How does cropping a PDF page work?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="edit-faq-3" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Click the edit icon on a page card, toggle Crop, draw
+                            or adjust the crop rectangle, and click Save Changes. Only cropped pages are re-rendered;
+                            all other pages remain vector lossless.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="edit-faq-4">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Can I standardize mixed PDF pages to A4 or US Letter?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="edit-faq-4" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Yes! Switch the Page Size selector to A4 or Letter
+                            and choose Auto, Portrait, or Landscape layout before clicking Save PDF.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="edit-faq-5">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Are my PDF files uploaded anywhere?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="edit-faq-5" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Never. Reordering, cropping, resizing, and deleting
+                            happen 100% locally in your browser. Looking to rotate pages? Try our dedicated <a href="../rotate-pdf/" style="color: hsl(var(--primary)); text-decoration: underline;">Rotate PDF</a> tool.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Tools Section -->
+        <section class="container" style="margin-top: 4rem; max-width: 800px; padding-bottom: 2rem;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">More PDF Tools</h2>
+            <div class="grid-tools"
+                style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+                <a href="../rotate-pdf/" class="glass-card" style="padding: 1.5rem;">
+                    <i class="fa-solid fa-rotate-right"
+                        style="font-size: 1.5rem; color: hsl(var(--primary)); margin-bottom: 0.5rem;"></i>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0;">Rotate PDF</h3>
+                </a>
+                <a href="../image-to-pdf/" class="glass-card" style="padding: 1.5rem;">
+                    <i class="fa-solid fa-images"
+                        style="font-size: 1.5rem; color: hsl(var(--primary)); margin-bottom: 0.5rem;"></i>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0;">Image to PDF</h3>
+                </a>
+                <a href="../compress-pdf/" class="glass-card" style="padding: 1.5rem;">
+                    <i class="fa-solid fa-minimize"
+                        style="font-size: 1.5rem; color: hsl(var(--primary)); margin-bottom: 0.5rem;"></i>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0;">Compress PDF</h3>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="seo-footer">
+        <div class="seo-footer-grid">
+            <div class="seo-footer-brand">
+                <h3>GhostPDF</h3>
+                <p>Free, private, browser-based PDF tools with zero file uploads, no watermarks, and no registration required. All 26 tools process files locally on your device.</p>
+                <p style="margin-top:0.75rem;"><a href="../blog/" style="color:hsl(var(--primary));font-weight:600;text-decoration:none;">Explore 50 PDF Guides &rarr;</a></p>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Organize, Edit &amp; Sign</h4>
+                <ul>
+                    <li><a href="../merge-pdf/">Merge PDF</a></li>
+                    <li><a href="../split-pdf/">Split PDF</a></li>
+                    <li><a href="../rotate-pdf/">Rotate PDF</a></li>
+                    <li><a href="../edit-pdf/">Organize & Edit PDF</a></li>
+                    <li><a href="../crop-pdf/">Crop PDF</a></li>
+                    <li><a href="../nup-pdf/">Pages per Sheet</a></li>
+                    <li><a href="../watermark-pdf/">Watermark PDF</a></li>
+                    <li><a href="../page-numbers-pdf/">Page Numbers</a></li>
+                    <li><a href="../sign-pdf/">Sign PDF</a></li>
+                </ul>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Convert &amp; Extract</h4>
+                <ul>
+                    <li><a href="../image-to-pdf/">Image to PDF</a></li>
+                    <li><a href="../pdf-to-image/">PDF to Image</a></li>
+                    <li><a href="../extract-images/">Extract Images</a></li>
+                    <li><a href="../word-to-pdf/">Word to PDF</a></li>
+                    <li><a href="../pdf-to-word/">PDF to Word</a></li>
+                    <li><a href="../excel-to-pdf/">Excel / CSV to PDF</a></li>
+                    <li><a href="../html-to-pdf/">HTML / MD to PDF</a></li>
+                    <li><a href="../pdf-to-markdown/">PDF to Markdown</a></li>
+                    <li><a href="../pdf-ocr/">PDF OCR</a></li>
+                </ul>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Security &amp; Optimize</h4>
+                <ul>
+                    <li><a href="../redact-pdf/">Redact PDF</a></li>
+                    <li><a href="../lock-pdf/">Lock PDF</a></li>
+                    <li><a href="../unlock-pdf/">Unlock PDF</a></li>
+                    <li><a href="../flatten-pdf/">Flatten PDF</a></li>
+                    <li><a href="../pdf-metadata/">PDF Metadata</a></li>
+                    <li><a href="../compare-pdf/">Compare PDF</a></li>
+                    <li><a href="../compress-pdf/">Compress PDF</a></li>
+                    <li><a href="../grayscale-pdf/">Grayscale / Invert PDF</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="seo-footer-bottom">
+            <p>&copy; 2026 GhostPDF. 100% Client-Side, Free &amp; Private PDF Tools.</p>
+        </div>
+    </footer>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "GhostPDF Organize & Edit PDF Tool",
+      "description": "Reorder, crop margins, resize to A4 or US Letter, and delete PDF pages online for free locally in your browser.",
+      "url": "https://ghostpdf.tech/edit-pdf/",
+      "applicationCategory": "Productivity",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does reordering or deleting pages keep original text quality?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Unless you explicitly crop a page, GhostPDF copies and rearranges your original vector PDF pages losslessly so selectable text and fonts remain razor sharp."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I delete individual pages from a PDF?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Click the trash icon on any page card to remove it before saving (at least one page must remain in the exported document)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does cropping a PDF page work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Click the edit icon on a page card, toggle Crop, draw or adjust the crop rectangle, and click Save Changes. Only cropped pages are re-rendered; all other pages remain vector lossless."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I standardize mixed PDF pages to A4 or US Letter?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Switch the Page Size selector to A4 or Letter and choose Auto, Portrait, or Landscape layout before clicking Save PDF."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are my PDF files uploaded anywhere?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Never. Reordering, cropping, resizing, and deleting happen 100% locally in your browser."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Crop Modal -->
+    <div id="crop-modal" class="modal-overlay">
+        <div class="modal-content glass-card" style="width: 90%; max-width: 800px; height: 80vh;">
+            <h3>Crop Page <span id="crop-page-num"></span></h3>
+            <div class="editor-container" style="flex: 1; background: #333; position: relative;">
+                <canvas id="crop-canvas"></canvas>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="toggle-crop-btn" title="Crop Page"><i
+                        class="fa-solid fa-crop-simple"></i> Crop</button>
+                <div style="flex: 1;"></div>
+                <button class="btn btn-secondary" id="close-editor">Cancel</button>
+                <button class="btn btn-primary" id="save-edit-btn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="modal-overlay" style="z-index: 2000;">
+        <div class="modal-content glass-card" style="max-width: 300px; text-align: center; align-items: center;">
+            <i class="fa-solid fa-spinner fa-spin"
+                style="font-size: 3rem; color: hsl(var(--primary)); margin-bottom: 1rem;"></i>
+            <h3>Processing PDF...</h3>
+            <p>Please wait while we load your file.</p>
+        </div>
+    </div>
+
+    <style>
+        .editor-stage-container {
+            max-height: 600px;
+            overflow-y: auto;
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .page-number-badge {
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            z-index: 10;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-sizing: border-box;
+        }
+
+        .page-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 3rem;
+            /* Space for buttons */
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .page-card.dragging {
+            opacity: 0.5;
+            border: 2px dashed var(--primary);
+        }
+
+        .page-card.over {
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(var(--primary), 0.3);
+        }
+
+        .page-preview {
+            width: 100%;
+            height: 150px;
+            /* Matching Image to PDF */
+            background: #000;
+            /* Matching Image to PDF */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .page-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-actions {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            background: rgba(0, 0, 0, 0.5);
+            /* Semi-transparent overlay */
+            border-top: none;
+            /* Removed border */
+            gap: 0;
+            /* Remove gap for seamless look or match image-to-pdf */
+        }
+
+        /* Optional: match the 'gap: 2px' from recent image-to-pdf edit if desired, 
+           but user said "exactly like img to pdf" and my previous view of img-to-pdf showed no gap in styles block 
+           (JS adds style="gap:2px"). I'll stick to CSS default or add it here. */
+
+        .page-actions button {
+            flex: 1;
+            background: none;
+            border: none;
+            color: #fff;
+            /* White text on dark overlay */
+            padding: 0.5rem;
+            cursor: pointer;
+            transition: 0.2s;
+            border-right: none;
+            /* handling separation via hover or spacing */
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .page-actions button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .page-actions button.btn-danger:hover {
+            background: #ff4444;
+        }
+
+        /* Modal specific */
+        .modal-toolbar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.5rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .tool-btn {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .tool-btn:hover,
+        .tool-btn.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+    </style>
+
+    <script defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script defer src="../js/utils.js"></script>
+    <script defer src="edit-pdf.js"></script>
+</body>
+
+</html>

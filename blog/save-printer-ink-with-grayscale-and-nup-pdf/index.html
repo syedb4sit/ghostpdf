@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+    <title>Cut Printing Paper and Ink Usage by 75% with Grayscale + N-up | GhostPDF Guides</title>
+    <meta name="description" content="Pair monochrome conversion with 4-up sheet imposition to stretch toner cartridges and simplify physical binders.">
+    <meta name="keywords" content="grayscale / invert pdf, pages per sheet, organization &amp; printing, client-side pdf tool, ghostpdf">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://ghostpdf.tech/blog/save-printer-ink-with-grayscale-and-nup-pdf/">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ghostpdf.tech/blog/save-printer-ink-with-grayscale-and-nup-pdf/">
+    <meta property="og:title" content="Cut Printing Paper and Ink Usage by 75% with Grayscale + N-up">
+    <meta property="og:description" content="Pair monochrome conversion with 4-up sheet imposition to stretch toner cartridges and simplify physical binders.">
+    <meta property="og:image" content="https://ghostpdf.tech/assets/android-chrome-512x512.png">
+    <meta property="og:site_name" content="GhostPDF">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://ghostpdf.tech/blog/save-printer-ink-with-grayscale-and-nup-pdf/">
+    <meta name="twitter:title" content="Cut Printing Paper and Ink Usage by 75% with Grayscale + N-up">
+    <meta name="twitter:description" content="Pair monochrome conversion with 4-up sheet imposition to stretch toner cartridges and simplify physical binders.">
+    <meta name="twitter:image" content="https://ghostpdf.tech/assets/android-chrome-512x512.png">
+    <meta name="theme-color" content="#dc143c">
+    <link rel="icon" href="../../assets/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="96x96" href="../../assets/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"></noscript>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+</head>
+<body>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="container">
+            <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/"><span itemprop="name">Home</span></a>
+                    <meta itemprop="position" content="1" />
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/blog/"><span itemprop="name">Blog</span></a>
+                    <meta itemprop="position" content="2" />
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/blog/save-printer-ink-with-grayscale-and-nup-pdf/"><span itemprop="name">Cut Printing Paper and Ink Usage by 75% with Grayscale + N-up</span></a>
+                    <meta itemprop="position" content="3" />
+                </li>
+            </ol>
+        </div>
+    </nav>
+
+    <nav class="navbar">
+        <a href="../../" class="logo"><img src="../../assets/favicon-96x96.png" alt="GhostPDF logo" width="34" height="34" decoding="async"> GhostPDF</a>
+        <div class="nav-links">
+            <a href="../../">All Tools</a>
+            <a href="../" class="active">Blog</a>
+            <a href="../../grayscale-pdf/" class="nav-extra">Grayscale / Invert PDF</a>
+        </div>
+    </nav>
+
+    <button id="theme-toggle" class="theme-ribbon-toggle" aria-label="Toggle dark mode">
+        <span class="ribbon-sun-wrapper">
+            <svg class="ribbon-sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+        </span>
+        <span class="ribbon-bookmark">
+            <svg class="ribbon-moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </span>
+    </button>
+
+    <main class="container" style="padding-top: 1.5rem; padding-bottom: 4rem;">
+        <div class="blog-layout">
+            <article class="blog-article">
+                <div class="blog-byline">
+                    <span class="blog-badge">Organization &amp; Printing</span>
+                    <span><i class="fa-regular fa-clock"></i> 4 min read</span>
+                    <span><i class="fa-regular fa-calendar"></i> Updated Nov 15, 2026</span>
+                </div>
+
+                <h1>Cut Printing Paper and Ink Usage by 75% with Grayscale + N-up</h1>
+                <p class="blog-lead">Pair monochrome conversion with 4-up sheet imposition to stretch toner cartridges and simplify physical binders.</p>
+
+                <div class="blog-takeaways">
+                    <strong>Key Takeaways</strong>
+                    <ul>
+                        <li><strong>Workflow Scope:</strong> Cut Printing Paper and Ink Usage by 75% with Grayscale + N-up &mdash; organized into 4 browser-local stages via <a href="../../grayscale-pdf/">Grayscale / Invert PDF</a> with zero file uploads.</li>
+                        <li><strong>Decision Matrix (Printing Setup):</strong> Side-by-side comparison covering Default 1-Up Single-Sided Color, Grayscale 2-Up Single-Sided, Grayscale 4-Up Single-Sided inside the interactive organization &amp; printing benchmark table below.</li>
+                        <li><strong>Quality Safeguard:</strong> Don&#x27;t Confuse Grayscale With Invert Colors Before Printing &mdash; backed by 3 production checks and 3 technical FAQs before final export.</li>
+                    </ul>
+                </div>
+
+                <h2 id="section-why">1. Why Color Slide Decks Drain Ink Cartridges (and How Monochrome N-Up Solves Both)</h2>
+                <p>Full-color keynote decks, styled technical whitepapers, and university lecture slides rely heavily on rich gradient backgrounds, colored banners, and one-slide-per-page formatting. Printing just fifty unedited slides straight to an office inkjet burns expensive tri-color CMY cartridges to reproduce pale backgrounds—and spits out fifty loose sheets when twelve sheets would easily carry all readable notes.</p>
+                <p>Chaining monochrome grayscale tone conversion cleanly with vector 4-up sheet imposition tackles both waste vectors simultaneously: eliminating costly color toner blends while tiling crisp 4-up grids onto neat duplex-ready paper sheets.</p>
+
+                <h2 id="section-steps">2. Two-Step Print Cost Reduction Workflow</h2>
+                <ol class="blog-steps">
+                    <li><strong>Strip Outer Blank Slide Borders First (Optional):</strong> If slides or academic handouts wrap thick blank frames, trim them away cleanly inside <a href="../../crop-pdf/">Crop PDF</a> beforehand.</li>
+                    <li><strong>Convert Color Fills to Crisp Monochrome:</strong> Drop your deck into <a href="../../grayscale-pdf/">Grayscale / Invert PDF</a> using Grayscale mode (not Night Invert—keep paper white!) so color ink drops to black-ink luminance.</li>
+                    <li><strong>Tile 2-Up or 4-Up Grids Via N-Up:</strong> Run the monochrome file through <a href="../../nup-pdf/">Pages per Sheet</a>, picking 2-up for dense readings or 4-up for spacious lecture decks.</li>
+                    <li><strong>Print Double-Sided for Maximum Savings:</strong> Check Two-Sided / Duplex inside your OS print panel—a 60-slide deck becomes just 8 crisp physical sheets!</li>
+                </ol>
+
+                <h2 id="section-comparison">3. Combined Ink &amp; Paper Reduction Math (60-Slide Course Pack)</h2>
+                <div class="blog-table-wrap">
+                    <table class="blog-table">
+                        <thead>
+                            <tr><th>Printing Setup</th><th>Physical Sheets Used</th><th>Color Cartridges Used?</th><th>Net Resource Savings</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Default 1-Up Single-Sided Color</td><td>60 sheets</td><td>Full CMY + Black</td><td>Baseline (highest cost)</td></tr>
+                            <tr><td>Grayscale 2-Up Single-Sided</td><td>30 sheets</td><td>Black toner only</td><td>50% paper + ~100% CMY ink saved</td></tr>
+                            <tr><td>Grayscale 4-Up Single-Sided</td><td>15 sheets</td><td>Black toner only</td><td>75% paper + ~100% CMY ink saved</td></tr>
+                            <tr><td>Grayscale 4-Up Duplex (Two-Sided)</td><td>8 sheets</td><td>Black toner only</td><td>~87% paper + ~100% CMY ink saved</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 id="section-pitfalls">4. Avoiding Dark-Slide Toner Traps &amp; Unreadable Grids</h2>
+                <ul class="blog-pitfalls">
+                    <li><strong>Don't Confuse <code>Grayscale</code> With <code>Invert Colors</code> Before Printing:</strong> Dark-mode inverted pages look great on tablets, yet flood real paper with solid black backgrounds—always pick pure Grayscale mode when prepping physical prints.</li>
+                    <li><strong>Keep Dense Text Packets at 2-Up Rather Than 4-Up:</strong> If lecture slides squeeze 9pt tables and tiny diagrams, 2-up keeps annotations readable with pen/pencil notes alongside.</li>
+                    <li><strong>Remove Duplicate Title/Transition Filler Slides First:</strong> Clear repeated section-divider animations cleanly inside <a href="../../edit-pdf/">Organize &amp; Edit PDF</a> before generating N-up handouts.</li>
+                </ul>
+
+                <h2 id="section-faq">5. Frequently Asked Questions</h2>
+                <div class="faq-list" style="margin-top:1rem;">
+                <div class="faq-item glass-card" style="margin-bottom: 0.75rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="b-faq-1">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question" style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Should I run Grayscale first or N-up first when optimizing a lecture deck?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="b-faq-1" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Either order works cleanly—often running Crop + N-up first reduces total pages cleanly, or Grayscale first on colored decks before 4-up imposition produces uniform monochrome handouts.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card" style="margin-bottom: 0.75rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="b-faq-2">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question" style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Does Grayscale conversion preserve crisp diagram readability on charts?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="b-faq-2" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Yes! Colored pie charts and bar lines map cleanly across distinct grayscale luminance tones—always double-check legends where red and green held near-identical brightness.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card" style="margin-bottom: 0.75rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="b-faq-3">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question" style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Can students run this entire print-prep routine on shared campus browsers?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="b-faq-3" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Yes! Zero desktop installations, accounts, or uploads are needed—drop, convert, download, and print straight from your browser tab.</p>
+                    </div>
+                </div>
+                </div>
+
+                <div class="blog-callout">
+                    <div>
+                        <strong style="display:block;font-size:1.05rem;color:hsl(var(--text-main));">Launch Grayscale / Invert PDF Free</strong>
+                        <span style="color:hsl(var(--text-muted));font-size:0.9rem;">Convert color PDFs to B&amp;W print or dark mode.</span>
+                    </div>
+                    <a href="../../grayscale-pdf/" class="btn btn-primary">Open Grayscale / Invert PDF</a>
+                </div>
+
+                <h2 style="margin-top: 2.5rem;">Related PDF Guides</h2>
+                <div class="blog-related-grid">
+                    <a href="../prepare-court-and-legal-exhibits-in-pdf/" class="glass-card blog-card" style="padding:1.25rem;">
+                        <span class="blog-badge">Organization &amp; Printing</span>
+                        <h3 style="font-size:1rem;line-height:1.35;color:hsl(var(--text-main));margin:0;">How to Assemble, Number, and Redact Legal Exhibit PDFs</h3>
+                        <span style="font-size:0.82rem;color:hsl(var(--primary));font-weight:600;">Read guide &rarr;</span>
+                    </a>
+                    <a href="../compress-portfolio-pdfs-without-blurry-images/" class="glass-card blog-card" style="padding:1.25rem;">
+                        <span class="blog-badge">Organization &amp; Printing</span>
+                        <h3 style="font-size:1rem;line-height:1.35;color:hsl(var(--text-main));margin:0;">How to Compress Design Portfolio PDFs Without Ruining Image Sharpness</h3>
+                        <span style="font-size:0.82rem;color:hsl(var(--primary));font-weight:600;">Read guide &rarr;</span>
+                    </a>
+                    <a href="../split-single-pages-from-scanned-packet/" class="glass-card blog-card" style="padding:1.25rem;">
+                        <span class="blog-badge">Organization &amp; Printing</span>
+                        <h3 style="font-size:1rem;line-height:1.35;color:hsl(var(--text-main));margin:0;">How to Extract Only the Pages You Need from a 100-Page PDF</h3>
+                        <span style="font-size:0.82rem;color:hsl(var(--primary));font-weight:600;">Read guide &rarr;</span>
+                    </a>
+                </div>
+            </article>
+
+            <aside class="blog-sidebar">
+                <div class="blog-sidebar-card">
+                    <h3>Recommended Tool</h3>
+                    <p style="font-size:0.88rem;color:hsl(var(--text-muted));margin-bottom:1rem;">Convert color PDFs to B&amp;W print or dark mode.</p>
+                    <a href="../../grayscale-pdf/" class="btn btn-primary" style="width:100%;margin-bottom:0.65rem;">Use Grayscale / Invert PDF</a>
+                    <a href="../../nup-pdf/" class="btn btn-secondary" style="width:100%;">Pair with Pages per Sheet</a>
+                </div>
+
+                <div class="blog-sidebar-card">
+                    <h3>On This Page</h3>
+                    <ul class="blog-toc">
+                        <li><a href="#section-why">1. Why Color Slide Decks Drain Ink Cartridges (and How Monochrome N-Up Solves Both)</a></li>
+                        <li><a href="#section-steps">2. Two-Step Print Cost Reduction Workflow</a></li>
+                        <li><a href="#section-comparison">3. Combined Ink &amp; Paper Reduction Math (60-Slide Course Pack)</a></li>
+                        <li><a href="#section-pitfalls">4. Avoiding Dark-Slide Toner Traps &amp; Unreadable Grids</a></li>
+                        <li><a href="#section-faq">5. Frequently Asked Questions</a></li>
+                    </ul>
+                </div>
+
+                <div class="blog-sidebar-card">
+                    <h3>Browse Library</h3>
+                    <p style="font-size:0.85rem;color:hsl(var(--text-muted));margin-bottom:0.85rem;">All 26 client-side PDF utilities and 50 practical guides.</p>
+                    <a href="../../" class="btn btn-secondary" style="width:100%;margin-bottom:0.5rem;">All 26 PDF Tools</a>
+                    <a href="../" class="btn btn-secondary" style="width:100%;">All 50 Blog Guides</a>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="seo-footer">
+        <div class="seo-footer-grid">
+            <div class="seo-footer-brand">
+                <h3>GhostPDF</h3>
+                <p>Free, private, browser-based PDF tools with zero file uploads, no watermarks, and no registration required. All 26 tools process files locally on your device.</p>
+                <p style="margin-top:0.75rem;"><a href="../../blog/" style="color:hsl(var(--primary));font-weight:600;text-decoration:none;">Explore 50 PDF Guides &rarr;</a></p>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Organize, Edit &amp; Sign</h4>
+                <ul>
+                    <li><a href="../../merge-pdf/">Merge PDF</a></li>
+                    <li><a href="../../split-pdf/">Split PDF</a></li>
+                    <li><a href="../../rotate-pdf/">Rotate PDF</a></li>
+                    <li><a href="../../edit-pdf/">Organize &amp; Edit PDF</a></li>
+                    <li><a href="../../crop-pdf/">Crop PDF</a></li>
+                    <li><a href="../../nup-pdf/">Pages per Sheet</a></li>
+                    <li><a href="../../watermark-pdf/">Watermark PDF</a></li>
+                    <li><a href="../../page-numbers-pdf/">Page Numbers</a></li>
+                    <li><a href="../../sign-pdf/">Sign PDF</a></li>
+                </ul>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Convert &amp; Extract</h4>
+                <ul>
+                    <li><a href="../../image-to-pdf/">Image to PDF</a></li>
+                    <li><a href="../../pdf-to-image/">PDF to Image</a></li>
+                    <li><a href="../../extract-images/">Extract Images</a></li>
+                    <li><a href="../../word-to-pdf/">Word to PDF</a></li>
+                    <li><a href="../../pdf-to-word/">PDF to Word</a></li>
+                    <li><a href="../../excel-to-pdf/">Excel / CSV to PDF</a></li>
+                    <li><a href="../../html-to-pdf/">HTML / MD to PDF</a></li>
+                    <li><a href="../../pdf-to-markdown/">PDF to Markdown</a></li>
+                    <li><a href="../../pdf-ocr/">PDF OCR</a></li>
+                </ul>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Security &amp; Optimize</h4>
+                <ul>
+                    <li><a href="../../redact-pdf/">Redact PDF</a></li>
+                    <li><a href="../../lock-pdf/">Lock PDF</a></li>
+                    <li><a href="../../unlock-pdf/">Unlock PDF</a></li>
+                    <li><a href="../../flatten-pdf/">Flatten PDF</a></li>
+                    <li><a href="../../pdf-metadata/">PDF Metadata</a></li>
+                    <li><a href="../../compare-pdf/">Compare PDF</a></li>
+                    <li><a href="../../compress-pdf/">Compress PDF</a></li>
+                    <li><a href="../../grayscale-pdf/">Grayscale / Invert PDF</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="seo-footer-bottom">
+            <p>&copy; 2026 GhostPDF. 100% Client-Side, Free &amp; Private PDF Tools.</p>
+        </div>
+    </footer>
+
+    <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Cut Printing Paper and Ink Usage by 75% with Grayscale + N-up",
+  "description": "Pair monochrome conversion with 4-up sheet imposition to stretch toner cartridges and simplify physical binders.",
+  "image": "https://ghostpdf.tech/assets/android-chrome-512x512.png",
+  "articleSection": "Organization & Printing",
+  "wordCount": 665,
+  "author": {
+    "@type": "Organization",
+    "name": "GhostPDF",
+    "url": "https://ghostpdf.tech/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "GhostPDF",
+    "url": "https://ghostpdf.tech/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ghostpdf.tech/assets/android-chrome-512x512.png"
+    }
+  },
+  "datePublished": "2026-11-15",
+  "dateModified": "2026-11-15",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ghostpdf.tech/blog/save-printer-ink-with-grayscale-and-nup-pdf/"
+  }
+}</script>
+    <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ghostpdf.tech/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ghostpdf.tech/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Cut Printing Paper and Ink Usage by 75% with Grayscale + N-up",
+      "item": "https://ghostpdf.tech/blog/save-printer-ink-with-grayscale-and-nup-pdf/"
+    }
+  ]
+}</script>
+    <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Should I run Grayscale first or N-up first when optimizing a lecture deck?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Either order works cleanly—often running Crop + N-up first reduces total pages cleanly, or Grayscale first on colored decks before 4-up imposition produces uniform monochrome handouts."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Grayscale conversion preserve crisp diagram readability on charts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Colored pie charts and bar lines map cleanly across distinct grayscale luminance tones—always double-check legends where red and green held near-identical brightness."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can students run this entire print-prep routine on shared campus browsers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Zero desktop installations, accounts, or uploads are needed—drop, convert, download, and print straight from your browser tab."
+      }
+    }
+  ]
+}</script>
+    <script defer src="../../js/utils.js"></script>
+</body>
+</html>

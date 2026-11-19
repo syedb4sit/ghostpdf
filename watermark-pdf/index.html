@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+
+    <!-- Primary Meta Tags -->
+    <title>Watermark PDF Online Free – Add Text or Logo Stamp | GhostPDF</title>
+    <meta name="title" content="Watermark PDF Online Free – Add Text or Logo Stamp | GhostPDF">
+    <meta name="description"
+        content="Add custom text or image watermarks to your PDF documents online. Resize, rotate, adjust opacity, and stamp every page locally in your browser.">
+    <meta name="keywords"
+        content="add watermark to pdf, watermark pdf online, text watermark pdf, image logo watermark pdf, pdf watermark free">
+    <meta name="author" content="GhostPDF">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ghostpdf.tech/watermark-pdf/">
+    <meta property="og:title" content="Watermark PDF Online Free | GhostPDF">
+    <meta property="og:description" content="Add custom text or image watermarks to your PDF securely in browser.">
+    <meta property="og:image" content="https://ghostpdf.tech/assets/android-chrome-512x512.png">
+
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://ghostpdf.tech/watermark-pdf/">
+    <meta property="twitter:title" content="Watermark PDF Online Free">
+    <meta property="twitter:description" content="Securely add text or logo watermarks to PDF files.">
+    <meta name="twitter:image" content="https://ghostpdf.tech/assets/android-chrome-512x512.png">
+
+    <link rel="canonical" href="https://ghostpdf.tech/watermark-pdf/">
+    <link rel="icon" href="../assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="96x96" href="../assets/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
+    <link rel="manifest" href="../assets/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"></noscript>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"></noscript>
+
+    <!-- Libraries -->
+    <script defer src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+    <style>
+        .preview-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.05);
+            /* Light gray for contrast */
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-sm);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+            overflow: auto;
+        }
+
+        .preview-wrapper {
+            position: relative;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .interactive-element {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px dashed hsl(var(--primary));
+            cursor: move;
+            user-select: none;
+            min-width: 50px;
+            min-height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .interactive-content {
+            pointer-events: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        .resize-handle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: hsl(var(--primary));
+            border-radius: 50%;
+            bottom: -5px;
+            right: -5px;
+            cursor: nwse-resize;
+        }
+
+        #pdf-canvas {
+            display: block;
+            max-width: 100%;
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .control-group {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            padding: 1.5rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .control-group h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 0.5rem;
+        }
+
+        .input-wrapper {
+            margin-bottom: 1rem;
+        }
+
+        .input-wrapper label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
+            color: hsl(var(--text-muted));
+        }
+
+        .input-wrapper input[type="text"],
+        .input-wrapper input[type="number"],
+        .input-wrapper select {
+            width: 100%;
+            padding: 0.6rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-sm);
+            color: hsl(var(--text-main));
+        }
+
+        .input-wrapper input[type="range"] {
+            width: 100%;
+        }
+
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            color: hsl(var(--text-main));
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: hsl(var(--primary));
+            color: white;
+            border-color: hsl(var(--primary));
+        }
+
+        .position-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            width: 100px;
+            margin: 0 auto;
+        }
+
+        .pos-btn {
+            aspect-ratio: 1;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .pos-btn.selected {
+            background: hsl(var(--primary));
+        }
+
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .layout-grid {
+                display: flex;
+                flex-direction: column-reverse;
+            }
+
+            .controls-sidebar {
+                width: 100%;
+            }
+
+            .preview-container {
+                min-height: 300px;
+            }
+        }
+
+        .rotate-handle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: hsl(var(--primary));
+            border-radius: 50%;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            cursor: grab;
+        }
+
+        .rotate-stem {
+            position: absolute;
+            width: 2px;
+            height: 20px;
+            background: hsl(var(--primary));
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+
+        /* File Header Layout for Reset Button */
+        .file-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--glass-border);
+        }
+
+        .file-name {
+            font-size: 1.1rem;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin: 0;
+            color: hsl(var(--text-main));
+        }
+
+        .reset-btn {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            color: #ff6b6b;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .reset-btn:hover {
+            background: rgba(255, 107, 107, 0.2);
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 600px) {
+            .file-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .reset-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="container">
+            <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1" />
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/watermark-pdf/">
+                        <span itemprop="name">Watermark PDF</span>
+                    </a>
+                    <meta itemprop="position" content="2" />
+                </li>
+            </ol>
+        </div>
+    </nav>
+
+    <nav class="navbar">
+        <a href="../" class="logo">
+            <img src="../assets/favicon-96x96.png" alt="GhostPDF logo" width="34" height="34" decoding="async"> GhostPDF
+        </a>
+        <div class="nav-links">
+            <a href="../">All Tools</a>
+            <a href="./" class="active">Watermark PDF</a>
+        </div>
+    </nav>
+
+    <button id="theme-toggle" class="theme-ribbon-toggle" aria-label="Toggle dark mode">
+        <!-- SVG icons same as other pages -->
+        <span class="ribbon-sun-wrapper">
+            <svg class="ribbon-sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+        </span>
+        <span class="ribbon-bookmark">
+            <svg class="ribbon-moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </span>
+    </button>
+
+    <main class="container">
+        <header style="text-align: center; margin-bottom: 3rem;">
+            <h1><span class="text-gradient">Watermark</span> PDF Online</h1>
+            <p style="color: hsl(var(--text-muted)); margin-top: 0.5rem;">Add custom text or logo image watermarks to your PDF.
+            </p>
+        </header>
+
+        <!-- Step 1: Upload -->
+        <div id="upload-stage" class="glass-card" style="max-width: 600px; margin: 0 auto;">
+            <div id="drop-zone" class="drop-zone">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <div class="drop-text">Drag & Drop PDF file here <br> or click to browse</div>
+            </div>
+            <input type="file" id="file-input" accept="application/pdf" hidden>
+        </div>
+
+        <!-- Step 2: Edit -->
+        <div id="edit-stage" style="display: none;">
+            <div class="glass-card" style="padding: 2rem;">
+                <div class="file-header">
+                    <h2 id="file-name-display" class="file-name">filename.pdf</h2>
+                    <button onclick="resetFile()" class="reset-btn">
+                        <i class="fa-solid fa-trash"></i> Reset
+                    </button>
+                </div>
+
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="text">Text Watermark</button>
+                    <button class="tab-btn" data-tab="image">Image Watermark</button>
+                </div>
+
+                <div class="layout-grid">
+                    <!-- Preview Area -->
+                    <div class="preview-container">
+                        <div class="preview-wrapper" id="preview-wrapper">
+                            <canvas id="pdf-canvas"></canvas>
+                            <!-- The Interactive Overlay will be injected here by JS -->
+                            <div id="watermark-overlay" class="interactive-element" style="display: none;">
+                                <div id="overlay-content" class="interactive-content"></div>
+                                <div class="resize-handle" id="resize-handle"></div>
+                                <div class="rotate-stem"></div>
+                                <div class="rotate-handle" id="rotate-handle"></div>
+                            </div>
+                        </div>
+                        <p style="margin-top: 1rem; color: hsl(var(--text-muted)); font-size: 0.9rem;">Preview of Page
+                            1. Drag to move, grab corner to resize.</p>
+                    </div>
+
+                    <!-- Controls Sidebar -->
+                    <div class="controls-sidebar">
+
+                        <!-- Text Controls -->
+                        <div id="text-controls" class="control-group">
+                            <h3>Text Settings</h3>
+                            <div class="input-wrapper">
+                                <label>Watermark Text</label>
+                                <input type="text" id="wm-text" value="CONFIDENTIAL">
+                            </div>
+                            <div class="input-wrapper">
+                                <label>Font Size</label>
+                                <input type="number" id="wm-size" value="50" min="10" max="200">
+                            </div>
+                            <div class="input-wrapper">
+                                <label>Opacity</label>
+                                <input type="range" id="wm-opacity" min="0" max="1" step="0.1" value="0.5">
+                            </div>
+                            <div class="input-wrapper">
+                                <label>Rotation</label>
+                                <input type="range" id="wm-rotation" min="-180" max="180" value="45">
+                            </div>
+                            <div class="input-wrapper">
+                                <label>Color</label>
+                                <input type="color" id="wm-color" value="#ff0000" style="width: 100%; height: 40px;">
+                            </div>
+                        </div>
+
+                        <!-- Image Controls -->
+                        <div id="image-controls" class="control-group" style="display: none;">
+                            <h3>Image Settings</h3>
+                            <div class="input-wrapper">
+                                <label>Upload Image</label>
+                                <label for="wm-image-input" class="btn"
+                                    style="display: block; text-align: center; cursor: pointer; background: rgba(255,255,255,0.05); border: 1px dashed var(--glass-border);">
+                                    <i class="fa-solid fa-image"></i> Choose Image
+                                </label>
+                                <input type="file" id="wm-image-input" accept="image/*" style="display: none;">
+                            </div>
+                            <div class="input-wrapper">
+                                <label>Opacity</label>
+                                <input type="range" id="wm-image-opacity" min="0" max="1" step="0.1" value="0.5">
+                            </div>
+                            <div class="input-wrapper">
+                                <label>Rotation</label>
+                                <input type="range" id="wm-image-rotation" min="-180" max="180" value="0">
+                            </div>
+                        </div>
+
+                        <!-- Page Number Controls -->
+                        <div id="numbers-controls" class="control-group" style="display: none;">
+                            <h3>Number Settings</h3>
+                            <div class="input-wrapper">
+                                <label>Format</label>
+                                <select id="pn-format">
+                                    <option value="simple">Page X</option>
+                                    <option value="of">Page X of N</option>
+                                    <option value="dash">- X -</option>
+                                </select>
+                            </div>
+                            <div class="input-wrapper">
+                                <label>Position</label>
+                                <select id="pn-position">
+                                    <option value="bottom-center">Bottom Center</option>
+                                    <option value="bottom-right">Bottom Right</option>
+                                    <option value="bottom-left">Bottom Left</option>
+                                    <option value="top-center">Top Center</option>
+                                    <option value="top-right">Top Right</option>
+                                    <option value="top-left">Top Left</option>
+                                </select>
+                            </div>
+                            <div class="input-wrapper">
+                                <label>Start From</label>
+                                <input type="number" id="pn-start" value="1">
+                            </div>
+                        </div>
+
+                        <div style="display: grid; gap: 1rem; margin-top: 1.5rem;">
+                            <button id="preview-full-btn" class="btn"
+                                style="background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border); width: 100%;">
+                                <i class="fa-solid fa-eye"></i> Apply & Preview Whole PDF
+                            </button>
+                            <button id="process-btn" class="btn btn-primary" style="width: 100%;">
+                                Apply & Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- How to Use Section -->
+        <section class="container" style="margin-top: 4rem; max-width: 800px;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">How to Add a Watermark to PDF</h2>
+            <div class="steps" style="display: grid; gap: 1.5rem;">
+                <div class="step-card glass-card">
+                    <h3>1. Upload PDF</h3>
+                    <p>Drag and drop your PDF document to open the interactive Page 1 editor canvas.</p>
+                </div>
+                <div class="step-card glass-card">
+                    <h3>2. Customize Text or Logo Watermark</h3>
+                    <p>Choose Text Watermark or Image Watermark, then drag to position, resize, rotate, adjust opacity, and preview the full PDF.</p>
+                </div>
+                <div class="step-card glass-card">
+                    <h3>3. Apply &amp; Download</h3>
+                    <p>Click "Apply &amp; Download" to stamp every page locally in your browser without uploading files.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="container" style="margin-top: 4rem; max-width: 800px; padding-bottom: 4rem;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Frequently Asked Questions</h2>
+            <div class="faq-accordion">
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="wm-faq-1">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            How do I position, resize, or rotate a text or image watermark?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="wm-faq-1" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Drag the watermark directly on the Page 1 preview
+                            with snap-to-center guides, drag the corner handle to resize, and adjust opacity or angle
+                            using the sliders or top rotation handle.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="wm-faq-2">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Can I use a PNG logo with a transparent background?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="wm-faq-2" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Yes! Switch to Image Watermark, upload a transparent
+                            PNG or JPG logo, drag it into position on Page 1, and set your desired opacity and angle.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="wm-faq-3">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Are watermarks applied to every page of the PDF?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="wm-faq-3" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Yes. Your text or logo watermark scales proportionally
+                            and stamps across every page of the document, and you can inspect every page with "Apply
+                            &amp; Preview Whole PDF".</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="wm-faq-4">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Where are my PDF and logo image processed?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="wm-faq-4" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Everything is rendered and stamped locally inside your
+                            browser using PDF-Lib and PDF.js — no files or images are uploaded to any server.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="wm-faq-5">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            How do I add sequential page numbers instead of a watermark?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="wm-faq-5" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Use our dedicated <a href="../page-numbers-pdf/" style="color: hsl(var(--primary)); text-decoration: underline;">Add Page Numbers</a> tool to insert "Page X" or "Page X of N" headers and footers automatically.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Tools Section -->
+        <section class="container" style="margin-top: 4rem; max-width: 800px; padding-bottom: 2rem;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">More PDF Tools</h2>
+            <div class="grid-tools"
+                style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+                <a href="../page-numbers-pdf/" class="glass-card" style="padding: 1.5rem;">
+                    <i class="fa-solid fa-list-ol"
+                        style="font-size: 1.5rem; color: hsl(var(--primary)); margin-bottom: 0.5rem;"></i>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0;">Add Page Numbers</h3>
+                </a>
+                <a href="../lock-pdf/" class="glass-card" style="padding: 1.5rem;">
+                    <i class="fa-solid fa-lock"
+                        style="font-size: 1.5rem; color: hsl(var(--primary)); margin-bottom: 0.5rem;"></i>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0;">Lock PDF</h3>
+                </a>
+                <a href="../edit-pdf/" class="glass-card" style="padding: 1.5rem;">
+                    <i class="fa-solid fa-pen-to-square"
+                        style="font-size: 1.5rem; color: hsl(var(--primary)); margin-bottom: 0.5rem;"></i>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0;">Organize PDF</h3>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- PDF Preview Modal -->
+    <div id="preview-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h3>PDF Preview</h3>
+                <button onclick="closePreviewModal()" class="close-btn"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <iframe id="preview-frame" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal-content {
+            width: 100%;
+            max-width: 1000px;
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            background: hsl(var(--bg-card));
+            border: 1px solid var(--glass-border);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .modal-body {
+            flex: 1;
+            background: #333;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: hsl(var(--text-main));
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .close-btn:hover {
+            color: #ff6b6b;
+        }
+    </style>
+
+    <footer class="seo-footer">
+        <div class="seo-footer-grid">
+            <div class="seo-footer-brand">
+                <h3>GhostPDF</h3>
+                <p>Free, private, browser-based PDF tools with zero file uploads, no watermarks, and no registration required. All 26 tools process files locally on your device.</p>
+                <p style="margin-top:0.75rem;"><a href="../blog/" style="color:hsl(var(--primary));font-weight:600;text-decoration:none;">Explore 50 PDF Guides &rarr;</a></p>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Organize, Edit &amp; Sign</h4>
+                <ul>
+                    <li><a href="../merge-pdf/">Merge PDF</a></li>
+                    <li><a href="../split-pdf/">Split PDF</a></li>
+                    <li><a href="../rotate-pdf/">Rotate PDF</a></li>
+                    <li><a href="../edit-pdf/">Organize & Edit PDF</a></li>
+                    <li><a href="../crop-pdf/">Crop PDF</a></li>
+                    <li><a href="../nup-pdf/">Pages per Sheet</a></li>
+                    <li><a href="../watermark-pdf/">Watermark PDF</a></li>
+                    <li><a href="../page-numbers-pdf/">Page Numbers</a></li>
+                    <li><a href="../sign-pdf/">Sign PDF</a></li>
+                </ul>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Convert &amp; Extract</h4>
+                <ul>
+                    <li><a href="../image-to-pdf/">Image to PDF</a></li>
+                    <li><a href="../pdf-to-image/">PDF to Image</a></li>
+                    <li><a href="../extract-images/">Extract Images</a></li>
+                    <li><a href="../word-to-pdf/">Word to PDF</a></li>
+                    <li><a href="../pdf-to-word/">PDF to Word</a></li>
+                    <li><a href="../excel-to-pdf/">Excel / CSV to PDF</a></li>
+                    <li><a href="../html-to-pdf/">HTML / MD to PDF</a></li>
+                    <li><a href="../pdf-to-markdown/">PDF to Markdown</a></li>
+                    <li><a href="../pdf-ocr/">PDF OCR</a></li>
+                </ul>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Security &amp; Optimize</h4>
+                <ul>
+                    <li><a href="../redact-pdf/">Redact PDF</a></li>
+                    <li><a href="../lock-pdf/">Lock PDF</a></li>
+                    <li><a href="../unlock-pdf/">Unlock PDF</a></li>
+                    <li><a href="../flatten-pdf/">Flatten PDF</a></li>
+                    <li><a href="../pdf-metadata/">PDF Metadata</a></li>
+                    <li><a href="../compare-pdf/">Compare PDF</a></li>
+                    <li><a href="../compress-pdf/">Compress PDF</a></li>
+                    <li><a href="../grayscale-pdf/">Grayscale / Invert PDF</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="seo-footer-bottom">
+            <p>&copy; 2026 GhostPDF. 100% Client-Side, Free &amp; Private PDF Tools.</p>
+        </div>
+    </footer>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "GhostPDF Watermark PDF Tool",
+      "description": "Add custom text watermarks and transparent logo images to PDF documents online for free in your browser.",
+      "url": "https://ghostpdf.tech/watermark-pdf/",
+      "applicationCategory": "Productivity",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I position, resize, or rotate a text or image watermark?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Drag the watermark directly on the Page 1 preview with snap-to-center guides, drag the corner handle to resize, and adjust opacity or angle using the sliders or top rotation handle."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use a PNG logo with a transparent background?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Switch to Image Watermark, upload a transparent PNG or JPG logo, drag it into position on Page 1, and set your desired opacity and angle."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are watermarks applied to every page of the PDF?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Your text or logo watermark scales proportionally and stamps across every page of the document, and you can inspect every page with Apply & Preview Whole PDF."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where are my PDF and logo image processed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Everything is rendered and stamped locally inside your browser using PDF-Lib and PDF.js — no files or images are uploaded to any server."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I add sequential page numbers instead of a watermark?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use our dedicated Add Page Numbers tool to insert Page X or Page X of N headers and footers automatically."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <script defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script defer src="../js/utils.js"></script>
+    <script defer src="watermark.js"></script>
+</body>
+
+</html>

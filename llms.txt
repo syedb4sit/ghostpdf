@@ -1,0 +1,45 @@
+# GhostPDF
+
+> Free, private, 100% client-side PDF toolkit running entirely inside the user's browser with zero server file uploads, no watermarks, and no registration.
+
+All 26 tools execute locally in browser memory using JavaScript and WebAssembly (`pdf-lib`, `PDF.js`, `jsPDF`, `Tesseract.js`, `Mammoth`, `SheetJS`, `marked`). Documents never leave the user's device.
+
+## Core Pages
+
+- [GhostPDF Home](https://ghostpdf.tech/): Directory of all 26 free client-side PDF tools.
+- [GhostPDF Blog & Guides](https://ghostpdf.tech/blog/): 50 practical, step-by-step PDF tutorials, privacy playbooks, and troubleshooting guides.
+
+## Organize, Edit & Sign Tools
+
+- [Merge PDF](https://ghostpdf.tech/merge-pdf/): Combine multiple PDF files in custom order locally in browser RAM.
+- [Split PDF](https://ghostpdf.tech/split-pdf/): Extract pages or split a PDF into separate documents without uploading.
+- [Rotate PDF](https://ghostpdf.tech/rotate-pdf/): Permanently rotate individual or all PDF pages 90, 180, or 270 degrees.
+- [Organize & Edit PDF](https://ghostpdf.tech/edit-pdf/): Reorder, crop, resize (A4/Letter), or delete PDF pages.
+- [Crop PDF](https://ghostpdf.tech/crop-pdf/): Trim white margins and adjust PDF crop boxes visually.
+- [Pages per Sheet (N-up)](https://ghostpdf.tech/nup-pdf/): Impose 2, 4, or 6 PDF pages onto one sheet for handouts and printing.
+- [Watermark PDF](https://ghostpdf.tech/watermark-pdf/): Stamp custom text or transparent image/logo watermarks across pages.
+- [Add Page Numbers](https://ghostpdf.tech/page-numbers-pdf/): Insert configurable page numbering and Bates-style stamps.
+- [Sign PDF](https://ghostpdf.tech/sign-pdf/): Draw, type, or upload PNG electronic signatures onto PDFs offline.
+
+## Convert & Extract Tools
+
+- [Image to PDF](https://ghostpdf.tech/image-to-pdf/): Convert JPG and PNG images into a single PDF.
+- [PDF to Image](https://ghostpdf.tech/pdf-to-image/): Render PDF pages to high-resolution PNG or JPG images.
+- [Extract PDF Images](https://ghostpdf.tech/extract-images/): Extract original embedded images from PDFs into a ZIP archive.
+- [Word to PDF](https://ghostpdf.tech/word-to-pdf/): Convert Microsoft Word `.docx` documents to PDF locally in the browser.
+- [PDF to Word](https://ghostpdf.tech/pdf-to-word/): Convert text-based PDFs into editable `.docx` Word documents in browser memory.
+- [Excel / CSV to PDF](https://ghostpdf.tech/excel-to-pdf/): Render `.xlsx` spreadsheets and `.csv` tables to formatted PDFs.
+- [HTML / Markdown to PDF](https://ghostpdf.tech/html-to-pdf/): Convert clean HTML snippets or Markdown notes into A4 PDFs.
+- [PDF to Markdown](https://ghostpdf.tech/pdf-to-markdown/): Extract clean Markdown formatted text for LLMs, Obsidian, and Notion.
+- [PDF OCR](https://ghostpdf.tech/pdf-ocr/): Extract text from scanned PDFs and images locally using WebAssembly Tesseract OCR.
+
+## Security, Comparison & Optimization Tools
+
+- [Redact PDF](https://ghostpdf.tech/redact-pdf/): Permanently burn out confidential text layers at the pixel level.
+- [Lock PDF](https://ghostpdf.tech/lock-pdf/): Password-protect and encrypt PDF documents before sharing.
+- [Unlock PDF](https://ghostpdf.tech/unlock-pdf/): Remove password protection from PDFs you own.
+- [Flatten PDF](https://ghostpdf.tech/flatten-pdf/): Lock interactive form fields, signatures, and annotations against edits.
+- [PDF Metadata Editor](https://ghostpdf.tech/pdf-metadata/): Inspect, edit, or strip hidden PDF title, author, and creator tags.
+- [Compare PDF](https://ghostpdf.tech/compare-pdf/): Visually diff and compare text changes between two PDF versions.
+- [Compress PDF](https://ghostpdf.tech/compress-pdf/): Reduce PDF file size locally for email and upload portals.
+- [Grayscale / Invert PDF](https://ghostpdf.tech/grayscale-pdf/): Convert PDFs to ink-saving grayscale or high-contrast dark mode.

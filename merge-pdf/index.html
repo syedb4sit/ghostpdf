@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+
+    <!-- Primary Meta Tags -->
+    <title>Merge PDF Online – Free & Secure PDF Merger | GhostPDF</title>
+    <meta name="title" content="Merge PDF Online – Free & Secure PDF Merger | GhostPDF">
+    <meta name="description"
+        content="Merge multiple PDF files into one document for free. Reorder pages, no file limits, no watermark, 100% secure online PDF merger.">
+    <meta name="keywords" content="merge PDF, combine PDF, PDF merger, online PDF merge, free PDF merger">
+    <meta name="author" content="GhostPDF">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ghostpdf.tech/merge-pdf/">
+    <meta property="og:title" content="Merge PDF Online – Free PDF Merger">
+    <meta property="og:description"
+        content="Combine multiple PDF files into one document for free. Reorder and merge PDFs securely.">
+    <meta property="og:image" content="https://ghostpdf.tech/assets/android-chrome-512x512.png">
+
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://ghostpdf.tech/merge-pdf/">
+    <meta property="twitter:title" content="Merge PDF Online – Free PDF Merger">
+    <meta property="twitter:description" content="Combine multiple PDF files into one document for free.">
+    <meta name="twitter:image" content="https://ghostpdf.tech/assets/android-chrome-512x512.png">
+
+    <link rel="canonical" href="https://ghostpdf.tech/merge-pdf/">
+    <link rel="icon" href="../assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="96x96" href="../assets/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
+    <link rel="manifest" href="../assets/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"></noscript>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"></noscript>
+    <script defer src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+    <!-- For drag-and-drop sorting -->
+</head>
+
+<body>
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="container">
+            <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1" />
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/merge-pdf/">
+                        <span itemprop="name">Merge PDF</span>
+                    </a>
+                    <meta itemprop="position" content="2" />
+                </li>
+            </ol>
+        </div>
+    </nav>
+
+    <nav class="navbar">
+        <a href="../" class="logo">
+            <img src="../assets/favicon-96x96.png" alt="GhostPDF logo" width="34" height="34" decoding="async"> GhostPDF
+        </a>
+        <div class="nav-links">
+            <a href="../">All Tools</a>
+            <a href="./" class="active">Merge PDF</a>
+        </div>
+    </nav>
+
+    <button id="theme-toggle" class="theme-ribbon-toggle" aria-label="Toggle dark mode">
+        <span class="ribbon-sun-wrapper">
+            <svg class="ribbon-sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+        </span>
+        <span class="ribbon-bookmark">
+            <svg class="ribbon-moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </span>
+    </button>
+
+    <main class="container">
+        <header style="text-align: center; margin-bottom: 3rem;">
+            <h1><span class="text-gradient">Merge PDF</span> Online</h1>
+            <p style="color: hsl(var(--text-muted)); margin-top: 0.5rem;">Combine multiple PDFs into one unified
+                document.</p>
+        </header>
+
+        <div class="glass-card" style="max-width: 800px; margin: 0 auto; text-align: left;">
+            <div id="drop-zone" class="drop-zone">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <div class="drop-text">Drag & Drop PDF files here <br> or click to browse</div>
+            </div>
+            <input type="file" id="file-input" accept="application/pdf" multiple hidden>
+
+            <div id="file-list-container" style="display: none; width: 100%;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem;">
+                    <div>
+                        <h3 style="margin-bottom: 0.3rem; font-size: 1.1rem; color: hsl(var(--text-muted));">Files to
+                            Merge</h3>
+                        <small style="color: hsl(var(--text-muted));" id="arrange-hint">Drag via the handle to
+                            reorder</small>
+                    </div>
+                </div>
+                <ul id="file-list" style="list-style: none; padding: 0;">
+                    <!-- File items will be injected here -->
+                </ul>
+                <div class="action-bar">
+                    <button id="add-more-btn" class="btn btn-secondary"><i class="fa-solid fa-plus"></i> Add
+                        More</button>
+                    <button id="merge-btn" class="btn btn-primary"><i class="fa-solid fa-file-export"></i> Merge
+                        PDFs</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- How to Use Section -->
+        <section class="container" style="margin-top: 4rem; max-width: 800px;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">How to Merge PDFs</h2>
+            <div class="steps" style="display: grid; gap: 1.5rem;">
+                <div class="step-card glass-card">
+                    <h3>1. Select Files</h3>
+                    <p>Upload the PDF files you want to combine. You can select multiple files at once.</p>
+                </div>
+                <div class="step-card glass-card">
+                    <h3>2. Reorder</h3>
+                    <p>Drag and drop the files to arrange them in the desired order.</p>
+                </div>
+                <div class="step-card glass-card">
+                    <h3>3. Merge</h3>
+                    <p>Click "Merge PDFs" to download your single combined document.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="container" style="margin-top: 4rem; max-width: 800px; padding-bottom: 4rem;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Frequently Asked Questions</h2>
+            <div class="faq-accordion">
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="merge-faq-1">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            How many PDF files can I merge at once?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="merge-faq-1" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">There is no strict file limit, though merging up to 50
+                            documents at a time keeps browser memory fast and responsive.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="merge-faq-2">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Will merging PDFs reduce quality or blur text?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="merge-faq-2" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">No. GhostPDF combines PDF pages losslessly in their
+                            original vector format, keeping selectable text, fonts, and embedded images sharp.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="merge-faq-3">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Are my confidential PDF files uploaded to any server?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="merge-faq-3" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Never. Merge PDF runs 100% locally in your browser
+                            using client-side JavaScript so sensitive contracts and receipts never leave your device.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="merge-faq-4">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Can I reorder files before merging?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="merge-faq-4" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Yes! Drag any file by its handle (or use the up and
+                            down buttons) to set the exact sequence before clicking Merge PDFs.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="merge-faq-5">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Can I merge PDFs of different page sizes (A4 and Letter)?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="merge-faq-5" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Yes, each page preserves its original dimensions and
+                            orientation inside the combined PDF document.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Related Tools Section -->
+        <section class="container" style="margin-top: 4rem; max-width: 800px; padding-bottom: 2rem;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">More PDF Tools</h2>
+            <div class="grid-tools"
+                style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+                <a href="../split-pdf/" class="glass-card" style="padding: 1.5rem;">
+                    <i class="fa-solid fa-scissors"
+                        style="font-size: 1.5rem; color: hsl(var(--primary)); margin-bottom: 0.5rem;"></i>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0;">Split PDF</h3>
+                </a>
+                <a href="../compress-pdf/" class="glass-card" style="padding: 1.5rem;">
+                    <i class="fa-solid fa-minimize"
+                        style="font-size: 1.5rem; color: hsl(var(--primary)); margin-bottom: 0.5rem;"></i>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0;">Compress PDF</h3>
+                </a>
+                <a href="../lock-pdf/" class="glass-card" style="padding: 1.5rem;">
+                    <i class="fa-solid fa-lock"
+                        style="font-size: 1.5rem; color: hsl(var(--primary)); margin-bottom: 0.5rem;"></i>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0;">Lock PDF</h3>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="seo-footer">
+        <div class="seo-footer-grid">
+            <div class="seo-footer-brand">
+                <h3>GhostPDF</h3>
+                <p>Free, private, browser-based PDF tools with zero file uploads, no watermarks, and no registration required. All 26 tools process files locally on your device.</p>
+                <p style="margin-top:0.75rem;"><a href="../blog/" style="color:hsl(var(--primary));font-weight:600;text-decoration:none;">Explore 50 PDF Guides &rarr;</a></p>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Organize, Edit &amp; Sign</h4>
+                <ul>
+                    <li><a href="../merge-pdf/">Merge PDF</a></li>
+                    <li><a href="../split-pdf/">Split PDF</a></li>
+                    <li><a href="../rotate-pdf/">Rotate PDF</a></li>
+                    <li><a href="../edit-pdf/">Organize & Edit PDF</a></li>
+                    <li><a href="../crop-pdf/">Crop PDF</a></li>
+                    <li><a href="../nup-pdf/">Pages per Sheet</a></li>
+                    <li><a href="../watermark-pdf/">Watermark PDF</a></li>
+                    <li><a href="../page-numbers-pdf/">Page Numbers</a></li>
+                    <li><a href="../sign-pdf/">Sign PDF</a></li>
+                </ul>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Convert &amp; Extract</h4>
+                <ul>
+                    <li><a href="../image-to-pdf/">Image to PDF</a></li>
+                    <li><a href="../pdf-to-image/">PDF to Image</a></li>
+                    <li><a href="../extract-images/">Extract Images</a></li>
+                    <li><a href="../word-to-pdf/">Word to PDF</a></li>
+                    <li><a href="../pdf-to-word/">PDF to Word</a></li>
+                    <li><a href="../excel-to-pdf/">Excel / CSV to PDF</a></li>
+                    <li><a href="../html-to-pdf/">HTML / MD to PDF</a></li>
+                    <li><a href="../pdf-to-markdown/">PDF to Markdown</a></li>
+                    <li><a href="../pdf-ocr/">PDF OCR</a></li>
+                </ul>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Security &amp; Optimize</h4>
+                <ul>
+                    <li><a href="../redact-pdf/">Redact PDF</a></li>
+                    <li><a href="../lock-pdf/">Lock PDF</a></li>
+                    <li><a href="../unlock-pdf/">Unlock PDF</a></li>
+                    <li><a href="../flatten-pdf/">Flatten PDF</a></li>
+                    <li><a href="../pdf-metadata/">PDF Metadata</a></li>
+                    <li><a href="../compare-pdf/">Compare PDF</a></li>
+                    <li><a href="../compress-pdf/">Compress PDF</a></li>
+                    <li><a href="../grayscale-pdf/">Grayscale / Invert PDF</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="seo-footer-bottom">
+            <p>&copy; 2026 GhostPDF. 100% Client-Side, Free &amp; Private PDF Tools.</p>
+        </div>
+    </footer>
+
+    <style>
+        .file-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            padding: 0.8rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: hsl(var(--text-main));
+            cursor: grab;
+            transition: var(--transition);
+        }
+
+        .file-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .file-item i {
+            margin-right: 0.8rem;
+            color: hsl(var(--primary));
+        }
+
+        #file-list {
+            max-height: calc(5 * 72px + 4 * 0.5rem);
+            overflow-y: auto;
+            padding-right: 0.25rem;
+            overscroll-behavior: contain;
+        }
+
+        #file-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #file-list::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+        }
+
+        #file-list::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .file-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .file-meta {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .file-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            min-width: 0;
+        }
+
+        .file-title i {
+            margin-right: 0;
+        }
+
+        .file-name {
+            display: inline-block;
+            max-width: 220px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .file-title:hover .file-name {
+            animation: marquee 6s linear infinite;
+        }
+
+        .file-size {
+            font-size: 0.75rem;
+            color: hsl(var(--text-muted));
+        }
+
+        .drag-handle {
+            background: rgba(var(--primary), 0.08);
+            border: 1px solid rgba(var(--primary), 0.2);
+            color: hsl(var(--primary));
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: grab;
+            transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+            flex: 0 0 auto;
+        }
+
+        .drag-handle:active {
+            cursor: grabbing;
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .drag-handle:hover {
+            background: rgba(var(--primary), 0.18);
+            box-shadow: 0 6px 14px rgba(220, 20, 60, 0.15);
+        }
+
+        .file-name {
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-right: 1rem;
+        }
+
+        .remove-btn {
+            background: none;
+            border: none;
+            color: hsl(var(--text-muted));
+            cursor: pointer;
+            padding: 0.2rem;
+            transition: var(--transition);
+        }
+
+        .remove-btn:hover {
+            color: #ff4444;
+        }
+
+        .sortable-ghost {
+            opacity: 0.4;
+            background: rgba(var(--primary), 0.2);
+        }
+
+        .sortable-drag {
+            animation: liftUp 0.25s ease-out;
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .order-controls {
+            margin-right: 1rem;
+        }
+
+        .arrow-btn {
+            background: transparent;
+            border: none;
+            color: hsl(var(--text-main));
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: color 0.2s;
+            font-size: 1rem;
+        }
+
+        .arrow-btn:hover:not(:disabled) {
+            background: transparent;
+            color: hsl(var(--primary));
+        }
+
+        .arrow-btn:active:not(:disabled) {
+            opacity: 0.6;
+            transform: scale(0.9);
+        }
+
+        .arrow-btn:disabled {
+            opacity: 0.3;
+            cursor: default;
+        }
+
+        .file-number {
+            margin-right: 0.8rem;
+            font-weight: bold;
+            color: hsl(var(--text-muted));
+            min-width: 20px;
+        }
+
+        @keyframes movePulse {
+            0% {
+                background: rgba(var(--primary), 0.2);
+                border-color: hsl(var(--primary));
+            }
+
+            100% {
+                background: rgba(255, 255, 255, 0.05);
+                border-color: var(--glass-border);
+            }
+        }
+
+        @keyframes liftUp {
+            0% {
+                transform: translateY(0);
+                box-shadow: none;
+            }
+
+            100% {
+                transform: translateY(-6px);
+                box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+            }
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .file-item.moved {
+            animation: liftUp 0.35s ease-out, movePulse 0.5s ease-out;
+        }
+
+        .remove-btn {
+            flex: 0 0 auto;
+        }
+
+        @media (max-width: 600px) {
+            .file-name {
+                max-width: 140px;
+            }
+
+            #file-list {
+                max-height: calc(3 * 72px + 2 * 0.5rem);
+            }
+        }
+
+        @media (max-width: 420px) {
+            .file-name {
+                max-width: 110px;
+            }
+        }
+    </style>
+
+    <script defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script defer src="../js/utils.js"></script>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How many PDF files can I merge at once?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "There is no strict file limit, though merging up to 50 documents at a time keeps browser memory fast and responsive."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will merging PDFs reduce quality or blur text?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. GhostPDF combines PDF pages losslessly in their original vector format, keeping selectable text, fonts, and embedded images sharp."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are my confidential PDF files uploaded to any server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Never. Merge PDF runs 100% locally in your browser using client-side JavaScript so sensitive contracts and receipts never leave your device."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I reorder files before merging?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Drag any file by its handle or use the up and down buttons to set the exact sequence before clicking Merge PDFs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I merge PDFs of different page sizes (A4 and Letter)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, each page preserves its original dimensions and orientation inside the combined PDF document."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "GhostPDF Merge PDF Tool",
+      "description": "Free online PDF merger. Combine and reorder multiple PDF files into one document locally in your browser.",
+      "url": "https://ghostpdf.tech/merge-pdf/",
+      "applicationCategory": "Productivity",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <script defer src="merge-pdf.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+
+    <!-- Primary Meta Tags -->
+    <title>Split PDF Online – Extract Pages Free | GhostPDF</title>
+    <meta name="title" content="Split PDF Online – Extract Pages Free | GhostPDF">
+    <meta name="description"
+        content="Split PDF files online. Extract pages or split PDF into multiple files. Fast, free, and secure. No signup required.">
+    <meta name="keywords" content="split PDF, extract PDF pages, PDF splitter, PDF page extractor, free PDF split">
+    <meta name="author" content="GhostPDF">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ghostpdf.tech/split-pdf/">
+    <meta property="og:title" content="Split PDF Online – Extract Pages Free">
+    <meta property="og:description"
+        content="Split PDF files online. Extract specific pages or separate every page into new files.">
+    <meta property="og:image" content="https://ghostpdf.tech/assets/android-chrome-512x512.png">
+
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://ghostpdf.tech/split-pdf/">
+    <meta property="twitter:title" content="Split PDF Online">
+    <meta property="twitter:description" content="Extract pages from PDF and split into multiple files.">
+    <meta name="twitter:image" content="https://ghostpdf.tech/assets/android-chrome-512x512.png">
+
+    <link rel="canonical" href="https://ghostpdf.tech/split-pdf/">
+    <link rel="icon" href="../assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="96x96" href="../assets/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
+    <link rel="manifest" href="../assets/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"></noscript>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"></noscript>
+    <!-- PDF Lib -->
+    <script defer src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+    <!-- JSZip for bulk download -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+
+<body>
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="container">
+            <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1" />
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/split-pdf/">
+                        <span itemprop="name">Split PDF</span>
+                    </a>
+                    <meta itemprop="position" content="2" />
+                </li>
+            </ol>
+        </div>
+    </nav>
+
+    <nav class="navbar">
+        <a href="../" class="logo">
+            <img src="../assets/favicon-96x96.png" alt="GhostPDF logo" width="34" height="34" decoding="async"> GhostPDF
+        </a>
+        <div class="nav-links">
+            <a href="../">All Tools</a>
+            <a href="./" class="active">Split PDF</a>
+        </div>
+    </nav>
+
+    <button id="theme-toggle" class="theme-ribbon-toggle" aria-label="Toggle dark mode">
+        <span class="ribbon-sun-wrapper">
+            <svg class="ribbon-sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+        </span>
+        <span class="ribbon-bookmark">
+            <svg class="ribbon-moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </span>
+    </button>
+
+    <main class="container">
+        <header style="text-align: center; margin-bottom: 3rem;">
+            <h1><span class="text-gradient">Split PDF</span> Online</h1>
+            <p style="color: hsl(var(--text-muted)); margin-top: 0.5rem;">Extract specific pages or separate every page
+                into a new file.</p>
+        </header>
+
+        <div class="glass-card" style="max-width: 800px; margin: 0 auto; text-align: left;">
+            <!-- Upload Stage -->
+            <div id="upload-stage">
+                <div id="drop-zone" class="drop-zone">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <div class="drop-text">Drag & Drop PDF file here <br> or click to browse</div>
+                    <input type="file" id="file-input" accept="application/pdf" hidden>
+                </div>
+            </div>
+
+            <!-- Options Stage -->
+            <div id="options-stage" style="display: none; width: 100%;">
+                <div class="file-info"
+                    style="display: flex; align-items: center; margin-bottom: 2rem; background: rgba(255,255,255,0.05); padding: 1rem; border-radius: var(--radius-sm);">
+                    <i class="fa-solid fa-file-pdf"
+                        style="font-size: 2rem; color: hsl(var(--primary)); margin-right: 1rem;"></i>
+                    <div>
+                        <h4 id="file-name" style="margin-bottom: 0.2rem;">filename.pdf</h4>
+                        <span id="page-count" style="color: hsl(var(--text-muted)); font-size: 0.9rem;">Loading
+                            pages...</span>
+                    </div>
+                    <button class="btn btn-secondary" onclick="resetApp()" style="margin-left: auto;">Change
+                        File</button>
+                </div>
+
+                <div class="split-options">
+                    <h3 style="margin-bottom: 1rem;">Split Mode</h3>
+
+                    <label style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; cursor: pointer;">
+                        <input type="radio" name="split-mode" value="all" checked onchange="toggleMode()">
+                        <span>
+                            <strong>Extract Every Page</strong>
+                            <div style="font-size: 0.8rem; color: hsl(var(--text-muted));">Save every page as a separate
+                                PDF file (downloaded as ZIP).</div>
+                        </span>
+                    </label>
+
+                    <label style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; cursor: pointer;">
+                        <input type="radio" name="split-mode" value="range" onchange="toggleMode()">
+                        <span>
+                            <strong>Extract Specific Pages</strong>
+                            <div style="font-size: 0.8rem; color: hsl(var(--text-muted));">Extract only selected pages
+                                into one new PDF.</div>
+                        </span>
+                    </label>
+
+                    <div id="range-input-container" style="display: none; margin-top: 1rem; padding-left: 2rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; color: hsl(var(--text-muted));">Page Ranges
+                            (e.g., "1, 3-5, 8"):</label>
+                        <input type="text" id="page-range" placeholder="e.g. 1-5, 8, 11-13">
+                    </div>
+                </div>
+
+                <div class="action-bar" style="justify-content: flex-end; margin-top: 2rem;">
+                    <button id="split-btn" class="btn btn-primary"><i class="fa-solid fa-scissors"></i> Split
+                        PDF</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- How to Use Section -->
+        <section class="container" style="margin-top: 4rem; max-width: 800px;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">How to Split a PDF</h2>
+            <div class="steps" style="display: grid; gap: 1.5rem;">
+                <div class="step-card glass-card">
+                    <h3>1. Upload PDF</h3>
+                    <p>Drag and drop your file to get started.</p>
+                </div>
+                <div class="step-card glass-card">
+                    <h3>2. Choose Mode</h3>
+                    <p>Select "Extract Every Page" to unzip all pages, or "Extract Specific Pages" to pick a custom
+                        range.</p>
+                </div>
+                <div class="step-card glass-card">
+                    <h3>3. Download</h3>
+                    <p>Get your separated files instantly.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="container" style="margin-top: 4rem; max-width: 800px; padding-bottom: 4rem;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Frequently Asked Questions</h2>
+            <div class="faq-accordion">
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="split-faq-1">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            How do I specify PDF page ranges to extract?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="split-faq-1" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Use commas for single pages and hyphens for page
+                            ranges — for example, entering <code>1, 3-5, 8</code> extracts pages 1, 3, 4, 5, and 8 into
+                            one clean PDF.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="split-faq-2">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Can I split every page into a separate PDF file at once?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="split-faq-2" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Yes! Choose "Extract Every Page" to automatically turn
+                            each page into its own PDF file bundled inside one convenient ZIP download.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="split-faq-3">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Does splitting a PDF reduce text or image quality?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="split-faq-3" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">No. GhostPDF copies the original vector PDF pages
+                            losslessly, preserving crisp typography, selectable text, and embedded graphics.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="split-faq-4">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Are my documents uploaded to a server when splitting?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="split-faq-4" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">No. Everything runs locally inside your web browser
+                            so private documents never leave your device.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="split-faq-5">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Is there a limit on PDF page count or usage?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="split-faq-5" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">There are no daily quotas, paywalls, or account
+                            requirements — you can split as many PDFs as your device memory supports.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Related Tools Section -->
+        <section class="container" style="margin-top: 4rem; max-width: 800px; padding-bottom: 2rem;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">More PDF Tools</h2>
+            <div class="grid-tools"
+                style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+                <a href="../merge-pdf/" class="glass-card" style="padding: 1.5rem;">
+                    <i class="fa-solid fa-object-group"
+                        style="font-size: 1.5rem; color: hsl(var(--primary)); margin-bottom: 0.5rem;"></i>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0;">Merge PDF</h3>
+                </a>
+                <a href="../compress-pdf/" class="glass-card" style="padding: 1.5rem;">
+                    <i class="fa-solid fa-minimize"
+                        style="font-size: 1.5rem; color: hsl(var(--primary)); margin-bottom: 0.5rem;"></i>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0;">Compress PDF</h3>
+                </a>
+                <a href="../edit-pdf/" class="glass-card" style="padding: 1.5rem;">
+                    <i class="fa-solid fa-pen-to-square"
+                        style="font-size: 1.5rem; color: hsl(var(--primary)); margin-bottom: 0.5rem;"></i>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0;">Organize PDF</h3>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="seo-footer">
+        <div class="seo-footer-grid">
+            <div class="seo-footer-brand">
+                <h3>GhostPDF</h3>
+                <p>Free, private, browser-based PDF tools with zero file uploads, no watermarks, and no registration required. All 26 tools process files locally on your device.</p>
+                <p style="margin-top:0.75rem;"><a href="../blog/" style="color:hsl(var(--primary));font-weight:600;text-decoration:none;">Explore 50 PDF Guides &rarr;</a></p>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Organize, Edit &amp; Sign</h4>
+                <ul>
+                    <li><a href="../merge-pdf/">Merge PDF</a></li>
+                    <li><a href="../split-pdf/">Split PDF</a></li>
+                    <li><a href="../rotate-pdf/">Rotate PDF</a></li>
+                    <li><a href="../edit-pdf/">Organize & Edit PDF</a></li>
+                    <li><a href="../crop-pdf/">Crop PDF</a></li>
+                    <li><a href="../nup-pdf/">Pages per Sheet</a></li>
+                    <li><a href="../watermark-pdf/">Watermark PDF</a></li>
+                    <li><a href="../page-numbers-pdf/">Page Numbers</a></li>
+                    <li><a href="../sign-pdf/">Sign PDF</a></li>
+                </ul>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Convert &amp; Extract</h4>
+                <ul>
+                    <li><a href="../image-to-pdf/">Image to PDF</a></li>
+                    <li><a href="../pdf-to-image/">PDF to Image</a></li>
+                    <li><a href="../extract-images/">Extract Images</a></li>
+                    <li><a href="../word-to-pdf/">Word to PDF</a></li>
+                    <li><a href="../pdf-to-word/">PDF to Word</a></li>
+                    <li><a href="../excel-to-pdf/">Excel / CSV to PDF</a></li>
+                    <li><a href="../html-to-pdf/">HTML / MD to PDF</a></li>
+                    <li><a href="../pdf-to-markdown/">PDF to Markdown</a></li>
+                    <li><a href="../pdf-ocr/">PDF OCR</a></li>
+                </ul>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Security &amp; Optimize</h4>
+                <ul>
+                    <li><a href="../redact-pdf/">Redact PDF</a></li>
+                    <li><a href="../lock-pdf/">Lock PDF</a></li>
+                    <li><a href="../unlock-pdf/">Unlock PDF</a></li>
+                    <li><a href="../flatten-pdf/">Flatten PDF</a></li>
+                    <li><a href="../pdf-metadata/">PDF Metadata</a></li>
+                    <li><a href="../compare-pdf/">Compare PDF</a></li>
+                    <li><a href="../compress-pdf/">Compress PDF</a></li>
+                    <li><a href="../grayscale-pdf/">Grayscale / Invert PDF</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="seo-footer-bottom">
+            <p>&copy; 2026 GhostPDF. 100% Client-Side, Free &amp; Private PDF Tools.</p>
+        </div>
+    </footer>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "GhostPDF Split PDF Tool",
+      "description": "Split PDF files online for free. Extract page ranges into a new PDF or separate every page into individual PDFs in a ZIP archive locally in your browser.",
+      "url": "https://ghostpdf.tech/split-pdf/",
+      "applicationCategory": "Productivity",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I specify PDF page ranges to extract?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use commas for single pages and hyphens for page ranges — for example, entering 1, 3-5, 8 extracts pages 1, 3, 4, 5, and 8 into one clean PDF."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I split every page into a separate PDF file at once?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Choose Extract Every Page to automatically turn each page into its own PDF file bundled inside one convenient ZIP download."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does splitting a PDF reduce text or image quality?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. GhostPDF copies the original vector PDF pages losslessly, preserving crisp typography, selectable text, and embedded graphics."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are my documents uploaded to a server when splitting?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Everything runs locally inside your web browser so private documents never leave your device."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a limit on PDF page count or usage?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "There are no daily quotas, paywalls, or account requirements — you can split as many PDFs as your device memory supports."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <script defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script defer src="../js/utils.js"></script>
+    <script defer src="split-pdf.js"></script>
+</body>
+
+</html>

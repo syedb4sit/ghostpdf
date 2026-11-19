@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+    <title>7 Tips to Get Near-100% Accuracy from Browser PDF OCR | GhostPDF Guides</title>
+    <meta name="description" content="Improve character recognition on skewed or dense scans by cropping margins, picking the right language pack, and prepping contrast.">
+    <meta name="keywords" content="pdf ocr, crop pdf, ocr &amp; productivity, client-side pdf tool, ghostpdf">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://ghostpdf.tech/blog/multilingual-pdf-ocr-tips-for-accurate-text/">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ghostpdf.tech/blog/multilingual-pdf-ocr-tips-for-accurate-text/">
+    <meta property="og:title" content="7 Tips to Get Near-100% Accuracy from Browser PDF OCR">
+    <meta property="og:description" content="Improve character recognition on skewed or dense scans by cropping margins, picking the right language pack, and prepping contrast.">
+    <meta property="og:image" content="https://ghostpdf.tech/assets/android-chrome-512x512.png">
+    <meta property="og:site_name" content="GhostPDF">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://ghostpdf.tech/blog/multilingual-pdf-ocr-tips-for-accurate-text/">
+    <meta name="twitter:title" content="7 Tips to Get Near-100% Accuracy from Browser PDF OCR">
+    <meta name="twitter:description" content="Improve character recognition on skewed or dense scans by cropping margins, picking the right language pack, and prepping contrast.">
+    <meta name="twitter:image" content="https://ghostpdf.tech/assets/android-chrome-512x512.png">
+    <meta name="theme-color" content="#dc143c">
+    <link rel="icon" href="../../assets/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="96x96" href="../../assets/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"></noscript>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+</head>
+<body>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="container">
+            <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/"><span itemprop="name">Home</span></a>
+                    <meta itemprop="position" content="1" />
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/blog/"><span itemprop="name">Blog</span></a>
+                    <meta itemprop="position" content="2" />
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/blog/multilingual-pdf-ocr-tips-for-accurate-text/"><span itemprop="name">7 Tips to Get Near-100% Accuracy from Browser PDF OCR</span></a>
+                    <meta itemprop="position" content="3" />
+                </li>
+            </ol>
+        </div>
+    </nav>
+
+    <nav class="navbar">
+        <a href="../../" class="logo"><img src="../../assets/favicon-96x96.png" alt="GhostPDF logo" width="34" height="34" decoding="async"> GhostPDF</a>
+        <div class="nav-links">
+            <a href="../../">All Tools</a>
+            <a href="../" class="active">Blog</a>
+            <a href="../../pdf-ocr/" class="nav-extra">PDF OCR</a>
+        </div>
+    </nav>
+
+    <button id="theme-toggle" class="theme-ribbon-toggle" aria-label="Toggle dark mode">
+        <span class="ribbon-sun-wrapper">
+            <svg class="ribbon-sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+        </span>
+        <span class="ribbon-bookmark">
+            <svg class="ribbon-moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </span>
+    </button>
+
+    <main class="container" style="padding-top: 1.5rem; padding-bottom: 4rem;">
+        <div class="blog-layout">
+            <article class="blog-article">
+                <div class="blog-byline">
+                    <span class="blog-badge">OCR &amp; Productivity</span>
+                    <span><i class="fa-regular fa-clock"></i> 4 min read</span>
+                    <span><i class="fa-regular fa-calendar"></i> Updated Nov 15, 2026</span>
+                </div>
+
+                <h1>7 Tips to Get Near-100% Accuracy from Browser PDF OCR</h1>
+                <p class="blog-lead">Improve character recognition on skewed or dense scans by cropping margins, picking the right language pack, and prepping contrast.</p>
+
+                <div class="blog-takeaways">
+                    <strong>Key Takeaways</strong>
+                    <ul>
+                        <li><strong>Workflow Scope:</strong> 7 Tips to Get Near-100% Accuracy from Browser PDF OCR &mdash; organized into 4 browser-local stages via <a href="../../pdf-ocr/">PDF OCR</a> with zero file uploads.</li>
+                        <li><strong>Decision Matrix (OCR Symptom):</strong> Side-by-side comparison covering Completely Garbled Random Symbols, Dropped Accents (é → e or a), Random Pipes | &amp; Noise Around Paragraphs inside the interactive ocr &amp; productivity benchmark table below.</li>
+                        <li><strong>Quality Safeguard:</strong> Split Giant Scanned Volumes Into Targeted 10-Page Runs &mdash; backed by 3 production checks and 3 technical FAQs before final export.</li>
+                    </ul>
+                </div>
+
+                <h2 id="section-why">1. Why Default English OCR Botches Accents, Non-Latin Scripts &amp; Skewed Scans</h2>
+                <p>Optical character recognition fails predictably when users run default English (<code>eng</code>) models blindly over French contracts, German invoices, Spanish deeds, or low-contrast multi-column receipts: accented vowels turn into gibberish brackets, skewed gutter lines split columns in half, and grey background speckles inject stray commas everywhere.</p>
+                <p>Tesseract WebAssembly inside modern browsers supports rich language-specific character sets and statistical dictionaries—but delivering near-lossless plain text depends critically on feeding the engine clean upright borders, high visual contrast, and matching language models.</p>
+
+                <h2 id="section-steps">2. 7 High-Impact Tips for Clean Local OCR Accuracy</h2>
+                <ol class="blog-steps">
+                    <li><strong>Fix Page Rotation First:</strong> Even a 90-degree rotated invoice crashes word recognition; permanently align pages upright via <a href="../../rotate-pdf/">Rotate PDF</a> before loading OCR.</li>
+                    <li><strong>Crop Binder Shadows &amp; Desk Borders:</strong> Trim black photocopy lid edges and noisy margins cleanly using <a href="../../crop-pdf/">Crop PDF</a> so bounding-box layout detectors lock strictly onto body paragraphs.</li>
+                    <li><strong>Boost Pale Text Contrast With Grayscale:</strong> For washed-out thermal ink or colored background forms, convert through <a href="../../grayscale-pdf/">Grayscale / Invert PDF</a> first if tinted paper muddies contrast.</li>
+                    <li><strong>Match the Exact Tesseract Language Pack:</strong> Inside <a href="../../pdf-ocr/">PDF OCR</a>, select your actual document language (<code>spa</code>, <code>fra</code>, <code>deu</code>, <code>eng</code>, etc.) so accents (<code>é</code>, <code>ü</code>, <code>ñ</code>, <code>ß</code>) decode accurately.</li>
+                </ol>
+
+                <h2 id="section-comparison">3. Diagnosing Common OCR Errors &amp; Instant Fixes</h2>
+                <div class="blog-table-wrap">
+                    <table class="blog-table">
+                        <thead>
+                            <tr><th>OCR Symptom</th><th>Root Cause</th><th>Exact Pre-OCR Remedy</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Completely Garbled Random Symbols</td><td>Page scanned upside down or sideways 90&deg;</td><td>Rotate PDF upright permanently before OCR</td></tr>
+                            <tr><td>Dropped Accents (<code>é</code> &rarr; <code>e</code> or <code>a</code>)</td><td>Wrong language dictionary selected (<code>eng</code>)</td><td>Switch language dropdown inside PDF OCR</td></tr>
+                            <tr><td>Random Pipes <code>|</code> &amp; Noise Around Paragraphs</td><td>Dark hole punches or photocopy margin lines</td><td>Trim borders tightly with Crop PDF</td></tr>
+                            <tr><td>Slow Processing on 100-Page Volume</td><td>Running 100 heavy scans in single browser pass</td><td>Split relevant chapters via Split PDF first</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 id="section-pitfalls">4. Post-OCR Cleanup Workflows for Busy Teams</h2>
+                <ul class="blog-pitfalls">
+                    <li><strong>Split Giant Scanned Volumes Into Targeted 10-Page Runs:</strong> Extracting text from just pages 12–18 saves minutes of local CPU cycles over recognizing a whole scanned book cover-to-cover.</li>
+                    <li><strong>Verify Two-Column Newspaper or Journal Reading Flow:</strong> Dense multi-column scans may read column lines smoothly or occasionally mix captions—skim paragraph boundaries cleanly before pasting straight into formal reports.</li>
+                    <li><strong>Check Digital Selectability First Before Running Any OCR:</strong> Always check if cursor highlight already works—modern bilingual contracts from Word parse lossless 100% natively in <a href="../../pdf-to-word/">PDF to Word</a>.</li>
+                </ul>
+
+                <h2 id="section-faq">5. Frequently Asked Questions</h2>
+                <div class="faq-list" style="margin-top:1rem;">
+                <div class="faq-item glass-card" style="margin-bottom: 0.75rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="b-faq-1">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question" style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Does Tesseract WebAssembly OCR work accurately on non-English European or multilingual PDFs?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="b-faq-1" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Yes, provided you pick the matching language pack inside GhostPDF PDF OCR so accented characters and native bigram probabilities apply cleanly.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card" style="margin-bottom: 0.75rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="b-faq-2">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question" style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Will compressing a scan right before OCR improve speed cleanly?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="b-faq-2" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">No—over-compressing scans introduces JPEG ringing artifacts around letters, hurting character accuracy. Always run OCR on crisp original scans FIRST, then run Compress PDF afterward if archiving!</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card" style="margin-bottom: 0.75rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="b-faq-3">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question" style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Where do downloaded OCR language files run?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="b-faq-3" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Trained language weights cache securely inside your browser and execute 100% locally in WebAssembly RAM with zero server transmission.</p>
+                    </div>
+                </div>
+                </div>
+
+                <div class="blog-callout">
+                    <div>
+                        <strong style="display:block;font-size:1.05rem;color:hsl(var(--text-main));">Launch PDF OCR Free</strong>
+                        <span style="color:hsl(var(--text-muted));font-size:0.9rem;">Extract searchable text from scanned PDFs locally.</span>
+                    </div>
+                    <a href="../../pdf-ocr/" class="btn btn-primary">Open PDF OCR</a>
+                </div>
+
+                <h2 style="margin-top: 2.5rem;">Related PDF Guides</h2>
+                <div class="blog-related-grid">
+                    <a href="../convert-pdfs-into-llm-ready-context/" class="glass-card blog-card" style="padding:1.25rem;">
+                        <span class="blog-badge">OCR &amp; Productivity</span>
+                        <h3 style="font-size:1rem;line-height:1.35;color:hsl(var(--text-main));margin:0;">Preparing Research PDFs for AI Assistants Using Markdown Extraction</h3>
+                        <span style="font-size:0.82rem;color:hsl(var(--primary));font-weight:600;">Read guide &rarr;</span>
+                    </a>
+                    <a href="../digitize-paper-notes-with-image-to-pdf-and-ocr/" class="glass-card blog-card" style="padding:1.25rem;">
+                        <span class="blog-badge">OCR &amp; Productivity</span>
+                        <h3 style="font-size:1rem;line-height:1.35;color:hsl(var(--text-main));margin:0;">Workflow: Digitize Paper Notebooks with Image-to-PDF and OCR</h3>
+                        <span style="font-size:0.82rem;color:hsl(var(--primary));font-weight:600;">Read guide &rarr;</span>
+                    </a>
+                    <a href="../how-to-reduce-pdf-size-under-2mb-for-portals/" class="glass-card blog-card" style="padding:1.25rem;">
+                        <span class="blog-badge">OCR &amp; Productivity</span>
+                        <h3 style="font-size:1rem;line-height:1.35;color:hsl(var(--text-main));margin:0;">How to Compress a PDF Under 2 MB for Visa and Job Portals</h3>
+                        <span style="font-size:0.82rem;color:hsl(var(--primary));font-weight:600;">Read guide &rarr;</span>
+                    </a>
+                </div>
+            </article>
+
+            <aside class="blog-sidebar">
+                <div class="blog-sidebar-card">
+                    <h3>Recommended Tool</h3>
+                    <p style="font-size:0.88rem;color:hsl(var(--text-muted));margin-bottom:1rem;">Extract searchable text from scanned PDFs locally.</p>
+                    <a href="../../pdf-ocr/" class="btn btn-primary" style="width:100%;margin-bottom:0.65rem;">Use PDF OCR</a>
+                    <a href="../../crop-pdf/" class="btn btn-secondary" style="width:100%;">Pair with Crop PDF</a>
+                </div>
+
+                <div class="blog-sidebar-card">
+                    <h3>On This Page</h3>
+                    <ul class="blog-toc">
+                        <li><a href="#section-why">1. Why Default English OCR Botches Accents, Non-Latin Scripts &amp; Skewed Scans</a></li>
+                        <li><a href="#section-steps">2. 7 High-Impact Tips for Clean Local OCR Accuracy</a></li>
+                        <li><a href="#section-comparison">3. Diagnosing Common OCR Errors &amp; Instant Fixes</a></li>
+                        <li><a href="#section-pitfalls">4. Post-OCR Cleanup Workflows for Busy Teams</a></li>
+                        <li><a href="#section-faq">5. Frequently Asked Questions</a></li>
+                    </ul>
+                </div>
+
+                <div class="blog-sidebar-card">
+                    <h3>Browse Library</h3>
+                    <p style="font-size:0.85rem;color:hsl(var(--text-muted));margin-bottom:0.85rem;">All 26 client-side PDF utilities and 50 practical guides.</p>
+                    <a href="../../" class="btn btn-secondary" style="width:100%;margin-bottom:0.5rem;">All 26 PDF Tools</a>
+                    <a href="../" class="btn btn-secondary" style="width:100%;">All 50 Blog Guides</a>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="seo-footer">
+        <div class="seo-footer-grid">
+            <div class="seo-footer-brand">
+                <h3>GhostPDF</h3>
+                <p>Free, private, browser-based PDF tools with zero file uploads, no watermarks, and no registration required. All 26 tools process files locally on your device.</p>
+                <p style="margin-top:0.75rem;"><a href="../../blog/" style="color:hsl(var(--primary));font-weight:600;text-decoration:none;">Explore 50 PDF Guides &rarr;</a></p>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Organize, Edit &amp; Sign</h4>
+                <ul>
+                    <li><a href="../../merge-pdf/">Merge PDF</a></li>
+                    <li><a href="../../split-pdf/">Split PDF</a></li>
+                    <li><a href="../../rotate-pdf/">Rotate PDF</a></li>
+                    <li><a href="../../edit-pdf/">Organize &amp; Edit PDF</a></li>
+                    <li><a href="../../crop-pdf/">Crop PDF</a></li>
+                    <li><a href="../../nup-pdf/">Pages per Sheet</a></li>
+                    <li><a href="../../watermark-pdf/">Watermark PDF</a></li>
+                    <li><a href="../../page-numbers-pdf/">Page Numbers</a></li>
+                    <li><a href="../../sign-pdf/">Sign PDF</a></li>
+                </ul>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Convert &amp; Extract</h4>
+                <ul>
+                    <li><a href="../../image-to-pdf/">Image to PDF</a></li>
+                    <li><a href="../../pdf-to-image/">PDF to Image</a></li>
+                    <li><a href="../../extract-images/">Extract Images</a></li>
+                    <li><a href="../../word-to-pdf/">Word to PDF</a></li>
+                    <li><a href="../../pdf-to-word/">PDF to Word</a></li>
+                    <li><a href="../../excel-to-pdf/">Excel / CSV to PDF</a></li>
+                    <li><a href="../../html-to-pdf/">HTML / MD to PDF</a></li>
+                    <li><a href="../../pdf-to-markdown/">PDF to Markdown</a></li>
+                    <li><a href="../../pdf-ocr/">PDF OCR</a></li>
+                </ul>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Security &amp; Optimize</h4>
+                <ul>
+                    <li><a href="../../redact-pdf/">Redact PDF</a></li>
+                    <li><a href="../../lock-pdf/">Lock PDF</a></li>
+                    <li><a href="../../unlock-pdf/">Unlock PDF</a></li>
+                    <li><a href="../../flatten-pdf/">Flatten PDF</a></li>
+                    <li><a href="../../pdf-metadata/">PDF Metadata</a></li>
+                    <li><a href="../../compare-pdf/">Compare PDF</a></li>
+                    <li><a href="../../compress-pdf/">Compress PDF</a></li>
+                    <li><a href="../../grayscale-pdf/">Grayscale / Invert PDF</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="seo-footer-bottom">
+            <p>&copy; 2026 GhostPDF. 100% Client-Side, Free &amp; Private PDF Tools.</p>
+        </div>
+    </footer>
+
+    <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "7 Tips to Get Near-100% Accuracy from Browser PDF OCR",
+  "description": "Improve character recognition on skewed or dense scans by cropping margins, picking the right language pack, and prepping contrast.",
+  "image": "https://ghostpdf.tech/assets/android-chrome-512x512.png",
+  "articleSection": "OCR & Productivity",
+  "wordCount": 685,
+  "author": {
+    "@type": "Organization",
+    "name": "GhostPDF",
+    "url": "https://ghostpdf.tech/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "GhostPDF",
+    "url": "https://ghostpdf.tech/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ghostpdf.tech/assets/android-chrome-512x512.png"
+    }
+  },
+  "datePublished": "2026-11-15",
+  "dateModified": "2026-11-15",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ghostpdf.tech/blog/multilingual-pdf-ocr-tips-for-accurate-text/"
+  }
+}</script>
+    <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ghostpdf.tech/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ghostpdf.tech/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "7 Tips to Get Near-100% Accuracy from Browser PDF OCR",
+      "item": "https://ghostpdf.tech/blog/multilingual-pdf-ocr-tips-for-accurate-text/"
+    }
+  ]
+}</script>
+    <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does Tesseract WebAssembly OCR work accurately on non-English European or multilingual PDFs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, provided you pick the matching language pack inside GhostPDF PDF OCR so accented characters and native bigram probabilities apply cleanly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will compressing a scan right before OCR improve speed cleanly?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No—over-compressing scans introduces JPEG ringing artifacts around letters, hurting character accuracy. Always run OCR on crisp original scans FIRST, then run Compress PDF afterward if archiving!"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where do downloaded OCR language files run?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Trained language weights cache securely inside your browser and execute 100% locally in WebAssembly RAM with zero server transmission."
+      }
+    }
+  ]
+}</script>
+    <script defer src="../../js/utils.js"></script>
+</body>
+</html>

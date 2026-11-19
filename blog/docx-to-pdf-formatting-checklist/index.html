@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+    <title>DOCX to PDF Checklist: Avoiding Font and Table Breaks | GhostPDF Guides</title>
+    <meta name="description" content="Keep tables, headings, and page flow tidy when converting Word .docx documents locally inside the browser.">
+    <meta name="keywords" content="word to pdf, html / md to pdf, pdf conversion, client-side pdf tool, ghostpdf">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://ghostpdf.tech/blog/docx-to-pdf-formatting-checklist/">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ghostpdf.tech/blog/docx-to-pdf-formatting-checklist/">
+    <meta property="og:title" content="DOCX to PDF Checklist: Avoiding Font and Table Breaks">
+    <meta property="og:description" content="Keep tables, headings, and page flow tidy when converting Word .docx documents locally inside the browser.">
+    <meta property="og:image" content="https://ghostpdf.tech/assets/android-chrome-512x512.png">
+    <meta property="og:site_name" content="GhostPDF">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://ghostpdf.tech/blog/docx-to-pdf-formatting-checklist/">
+    <meta name="twitter:title" content="DOCX to PDF Checklist: Avoiding Font and Table Breaks">
+    <meta name="twitter:description" content="Keep tables, headings, and page flow tidy when converting Word .docx documents locally inside the browser.">
+    <meta name="twitter:image" content="https://ghostpdf.tech/assets/android-chrome-512x512.png">
+    <meta name="theme-color" content="#dc143c">
+    <link rel="icon" href="../../assets/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="96x96" href="../../assets/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"></noscript>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+</head>
+<body>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="container">
+            <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/"><span itemprop="name">Home</span></a>
+                    <meta itemprop="position" content="1" />
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/blog/"><span itemprop="name">Blog</span></a>
+                    <meta itemprop="position" content="2" />
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/blog/docx-to-pdf-formatting-checklist/"><span itemprop="name">DOCX to PDF Checklist: Avoiding Font and Table Breaks</span></a>
+                    <meta itemprop="position" content="3" />
+                </li>
+            </ol>
+        </div>
+    </nav>
+
+    <nav class="navbar">
+        <a href="../../" class="logo"><img src="../../assets/favicon-96x96.png" alt="GhostPDF logo" width="34" height="34" decoding="async"> GhostPDF</a>
+        <div class="nav-links">
+            <a href="../../">All Tools</a>
+            <a href="../" class="active">Blog</a>
+            <a href="../../word-to-pdf/" class="nav-extra">Word to PDF</a>
+        </div>
+    </nav>
+
+    <button id="theme-toggle" class="theme-ribbon-toggle" aria-label="Toggle dark mode">
+        <span class="ribbon-sun-wrapper">
+            <svg class="ribbon-sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+        </span>
+        <span class="ribbon-bookmark">
+            <svg class="ribbon-moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </span>
+    </button>
+
+    <main class="container" style="padding-top: 1.5rem; padding-bottom: 4rem;">
+        <div class="blog-layout">
+            <article class="blog-article">
+                <div class="blog-byline">
+                    <span class="blog-badge">PDF Conversion</span>
+                    <span><i class="fa-regular fa-clock"></i> 4 min read</span>
+                    <span><i class="fa-regular fa-calendar"></i> Updated Nov 15, 2026</span>
+                </div>
+
+                <h1>DOCX to PDF Checklist: Avoiding Font and Table Breaks</h1>
+                <p class="blog-lead">Keep tables, headings, and page flow tidy when converting Word .docx documents locally inside the browser.</p>
+
+                <div class="blog-takeaways">
+                    <strong>Key Takeaways</strong>
+                    <ul>
+                        <li><strong>Workflow Scope:</strong> DOCX to PDF Checklist: Avoiding Font and Table Breaks &mdash; organized into 4 browser-local stages via <a href="../../word-to-pdf/">Word to PDF</a> with zero file uploads.</li>
+                        <li><strong>Decision Matrix (Word Element):</strong> Side-by-side comparison covering Standard Headings &amp; Bold/Italic, Simple Multi-Column Tables, Inline Embedded PNG / JPG Charts inside the interactive pdf conversion benchmark table below.</li>
+                        <li><strong>Quality Safeguard:</strong> Convert Legacy Binary .doc to .docx First &mdash; backed by 3 production checks and 3 technical FAQs before final export.</li>
+                    </ul>
+                </div>
+
+                <h2 id="section-why">1. Why Word Files Reflow Differently Across Devices (and How Pre-Flight Prep Fixes It)</h2>
+                <p>Sending raw <code>.docx</code> files directly to hiring managers, legal counsel, or print vendors invites subtle visual regressions: missing local fonts get substituted across Windows and macOS, margin wrapping shifts resume bullet points onto a stray page two, and reviewers in different Word builds see completely different pagination.</p>
+                <p>Converting <code>.docx</code> locally to paginated A4 PDF inside the browser freezes typography, tables, and embedded graphics cleanly without relying on unstable external LibreOffice server queues—provided your source document follows a few clean formatting fundamentals beforehand.</p>
+
+                <h2 id="section-steps">2. Pre-Flight Word Prep &amp; Browser Conversion Workflow</h2>
+                <ol class="blog-steps">
+                    <li><strong>Simplify Floating Elements in DOCX:</strong> Replace fragile floating text boxes with clean inline headings, standard bullet lists, and structured Word tables before export.</li>
+                    <li><strong>Drop DOCX Into Word to PDF:</strong> Load your <code>.docx</code> file in <a href="../../word-to-pdf/">Word to PDF</a> to convert locally with Mammoth, HTML canvas rendering, and jsPDF pagination.</li>
+                    <li><strong>Verify Page Breaks &amp; Table Alignment:</strong> Open the downloaded PDF and ensure major H2 sections or resume headers aren't stranded alone at page bottoms.</li>
+                    <li><strong>Add Footer Numbers &amp; Scrub Metadata:</strong> Stamp <code>Page X of N</code> via <a href="../../page-numbers-pdf/">Page Numbers</a> and inspect internal Author metadata in <a href="../../pdf-metadata/">PDF Metadata</a>.</li>
+                </ol>
+
+                <h2 id="section-comparison">3. DOCX Feature Compatibility Checklist</h2>
+                <div class="blog-table-wrap">
+                    <table class="blog-table">
+                        <thead>
+                            <tr><th>Word Element</th><th>Browser Conversion Behavior</th><th>Recommended Prep</th><th>Fix If Clipped</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Standard Headings &amp; Bold/Italic</td><td>Preserved faithfully</td><td>Use native Word Heading 1&ndash;3</td><td>Ensure single clean font family</td></tr>
+                            <tr><td>Simple Multi-Column Tables</td><td>Renders clean HTML grid</td><td>Avoid nested tables-in-tables</td><td>Keep tables within 6.5 in printable width</td></tr>
+                            <tr><td>Inline Embedded PNG / JPG Charts</td><td>Embedded straight into PDF</td><td>Use 150&ndash;300 DPI images</td><td>Compress afterward if file exceeds 2 MB</td></tr>
+                            <tr><td>Complex Floating Shapes / Macros</td><td>Best kept static beforehand</td><td>Flatten complex diagrams to PNG</td><td>Insert flattened PNG before export</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 id="section-pitfalls">4. Final Inspection Habits Before Distributing PDFs</h2>
+                <ul class="blog-pitfalls">
+                    <li><strong>Convert Legacy Binary <code>.doc</code> to <code>.docx</code> First:</strong> Mammoth cleanly parses XML-based <code>.docx</code> files directly in browser; resave ancient <code>.doc</code> files once as <code>.docx</code> if needed.</li>
+                    <li><strong>Check Final File Size on Image-Heavy Briefs:</strong> Canvas-rendered reports with screenshots can compress smoothly via <a href="../../compress-pdf/">Compress PDF</a> before attaching to email.</li>
+                    <li><strong>Compare Revisions Against Earlier Drafts:</strong> Upload both v1 and v2 PDF exports into <a href="../../compare-pdf/">Compare PDF</a> to catch inadvertent pagination shifts.</li>
+                </ul>
+
+                <h2 id="section-faq">5. Frequently Asked Questions</h2>
+                <div class="faq-list" style="margin-top:1rem;">
+                <div class="faq-item glass-card" style="margin-bottom: 0.75rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="b-faq-1">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question" style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Why did GhostPDF switch Word to PDF to run 100% in the browser?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="b-faq-1" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Browser-based Mammoth + jsPDF conversion works permanently with zero server downtime, zero upload wait, and complete document privacy.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card" style="margin-bottom: 0.75rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="b-faq-2">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question" style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Can I convert password-protected resumes back into Word after editing?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="b-faq-2" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Yes, for unlocked digital PDFs use PDF to Word cleanly locally; if locked, unlock first via GhostPDF Unlock PDF using your authorized password.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card" style="margin-bottom: 0.75rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="b-faq-3">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question" style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Does Word to PDF stamp branding footers onto my resume or contract?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="b-faq-3" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Never. Every generated PDF is completely clean and watermark-free.</p>
+                    </div>
+                </div>
+                </div>
+
+                <div class="blog-callout">
+                    <div>
+                        <strong style="display:block;font-size:1.05rem;color:hsl(var(--text-main));">Launch Word to PDF Free</strong>
+                        <span style="color:hsl(var(--text-muted));font-size:0.9rem;">Convert DOCX documents to PDF inside your browser.</span>
+                    </div>
+                    <a href="../../word-to-pdf/" class="btn btn-primary">Open Word to PDF</a>
+                </div>
+
+                <h2 style="margin-top: 2.5rem;">Related PDF Guides</h2>
+                <div class="blog-related-grid">
+                    <a href="../choosing-between-pdf-to-word-and-pdf-ocr/" class="glass-card blog-card" style="padding:1.25rem;">
+                        <span class="blog-badge">PDF Conversion</span>
+                        <h3 style="font-size:1rem;line-height:1.35;color:hsl(var(--text-main));margin:0;">PDF to Word vs. PDF OCR: When to Use Which Tool</h3>
+                        <span style="font-size:0.82rem;color:hsl(var(--primary));font-weight:600;">Read guide &rarr;</span>
+                    </a>
+                    <a href="../how-to-ocr-scanned-pdfs-locally-in-browser/" class="glass-card blog-card" style="padding:1.25rem;">
+                        <span class="blog-badge">OCR &amp; Productivity</span>
+                        <h3 style="font-size:1rem;line-height:1.35;color:hsl(var(--text-main));margin:0;">How to Run OCR on Scanned PDFs Locally Without Cloud Limits</h3>
+                        <span style="font-size:0.82rem;color:hsl(var(--primary));font-weight:600;">Read guide &rarr;</span>
+                    </a>
+                    <a href="../multilingual-pdf-ocr-tips-for-accurate-text/" class="glass-card blog-card" style="padding:1.25rem;">
+                        <span class="blog-badge">OCR &amp; Productivity</span>
+                        <h3 style="font-size:1rem;line-height:1.35;color:hsl(var(--text-main));margin:0;">7 Tips to Get Near-100% Accuracy from Browser PDF OCR</h3>
+                        <span style="font-size:0.82rem;color:hsl(var(--primary));font-weight:600;">Read guide &rarr;</span>
+                    </a>
+                </div>
+            </article>
+
+            <aside class="blog-sidebar">
+                <div class="blog-sidebar-card">
+                    <h3>Recommended Tool</h3>
+                    <p style="font-size:0.88rem;color:hsl(var(--text-muted));margin-bottom:1rem;">Convert DOCX documents to PDF inside your browser.</p>
+                    <a href="../../word-to-pdf/" class="btn btn-primary" style="width:100%;margin-bottom:0.65rem;">Use Word to PDF</a>
+                    <a href="../../html-to-pdf/" class="btn btn-secondary" style="width:100%;">Pair with HTML / MD to PDF</a>
+                </div>
+
+                <div class="blog-sidebar-card">
+                    <h3>On This Page</h3>
+                    <ul class="blog-toc">
+                        <li><a href="#section-why">1. Why Word Files Reflow Differently Across Devices (and How Pre-Flight Prep Fixes It)</a></li>
+                        <li><a href="#section-steps">2. Pre-Flight Word Prep &amp; Browser Conversion Workflow</a></li>
+                        <li><a href="#section-comparison">3. DOCX Feature Compatibility Checklist</a></li>
+                        <li><a href="#section-pitfalls">4. Final Inspection Habits Before Distributing PDFs</a></li>
+                        <li><a href="#section-faq">5. Frequently Asked Questions</a></li>
+                    </ul>
+                </div>
+
+                <div class="blog-sidebar-card">
+                    <h3>Browse Library</h3>
+                    <p style="font-size:0.85rem;color:hsl(var(--text-muted));margin-bottom:0.85rem;">All 26 client-side PDF utilities and 50 practical guides.</p>
+                    <a href="../../" class="btn btn-secondary" style="width:100%;margin-bottom:0.5rem;">All 26 PDF Tools</a>
+                    <a href="../" class="btn btn-secondary" style="width:100%;">All 50 Blog Guides</a>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="seo-footer">
+        <div class="seo-footer-grid">
+            <div class="seo-footer-brand">
+                <h3>GhostPDF</h3>
+                <p>Free, private, browser-based PDF tools with zero file uploads, no watermarks, and no registration required. All 26 tools process files locally on your device.</p>
+                <p style="margin-top:0.75rem;"><a href="../../blog/" style="color:hsl(var(--primary));font-weight:600;text-decoration:none;">Explore 50 PDF Guides &rarr;</a></p>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Organize, Edit &amp; Sign</h4>
+                <ul>
+                    <li><a href="../../merge-pdf/">Merge PDF</a></li>
+                    <li><a href="../../split-pdf/">Split PDF</a></li>
+                    <li><a href="../../rotate-pdf/">Rotate PDF</a></li>
+                    <li><a href="../../edit-pdf/">Organize &amp; Edit PDF</a></li>
+                    <li><a href="../../crop-pdf/">Crop PDF</a></li>
+                    <li><a href="../../nup-pdf/">Pages per Sheet</a></li>
+                    <li><a href="../../watermark-pdf/">Watermark PDF</a></li>
+                    <li><a href="../../page-numbers-pdf/">Page Numbers</a></li>
+                    <li><a href="../../sign-pdf/">Sign PDF</a></li>
+                </ul>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Convert &amp; Extract</h4>
+                <ul>
+                    <li><a href="../../image-to-pdf/">Image to PDF</a></li>
+                    <li><a href="../../pdf-to-image/">PDF to Image</a></li>
+                    <li><a href="../../extract-images/">Extract Images</a></li>
+                    <li><a href="../../word-to-pdf/">Word to PDF</a></li>
+                    <li><a href="../../pdf-to-word/">PDF to Word</a></li>
+                    <li><a href="../../excel-to-pdf/">Excel / CSV to PDF</a></li>
+                    <li><a href="../../html-to-pdf/">HTML / MD to PDF</a></li>
+                    <li><a href="../../pdf-to-markdown/">PDF to Markdown</a></li>
+                    <li><a href="../../pdf-ocr/">PDF OCR</a></li>
+                </ul>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Security &amp; Optimize</h4>
+                <ul>
+                    <li><a href="../../redact-pdf/">Redact PDF</a></li>
+                    <li><a href="../../lock-pdf/">Lock PDF</a></li>
+                    <li><a href="../../unlock-pdf/">Unlock PDF</a></li>
+                    <li><a href="../../flatten-pdf/">Flatten PDF</a></li>
+                    <li><a href="../../pdf-metadata/">PDF Metadata</a></li>
+                    <li><a href="../../compare-pdf/">Compare PDF</a></li>
+                    <li><a href="../../compress-pdf/">Compress PDF</a></li>
+                    <li><a href="../../grayscale-pdf/">Grayscale / Invert PDF</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="seo-footer-bottom">
+            <p>&copy; 2026 GhostPDF. 100% Client-Side, Free &amp; Private PDF Tools.</p>
+        </div>
+    </footer>
+
+    <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "DOCX to PDF Checklist: Avoiding Font and Table Breaks",
+  "description": "Keep tables, headings, and page flow tidy when converting Word .docx documents locally inside the browser.",
+  "image": "https://ghostpdf.tech/assets/android-chrome-512x512.png",
+  "articleSection": "PDF Conversion",
+  "wordCount": 629,
+  "author": {
+    "@type": "Organization",
+    "name": "GhostPDF",
+    "url": "https://ghostpdf.tech/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "GhostPDF",
+    "url": "https://ghostpdf.tech/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ghostpdf.tech/assets/android-chrome-512x512.png"
+    }
+  },
+  "datePublished": "2026-11-15",
+  "dateModified": "2026-11-15",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ghostpdf.tech/blog/docx-to-pdf-formatting-checklist/"
+  }
+}</script>
+    <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ghostpdf.tech/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ghostpdf.tech/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "DOCX to PDF Checklist: Avoiding Font and Table Breaks",
+      "item": "https://ghostpdf.tech/blog/docx-to-pdf-formatting-checklist/"
+    }
+  ]
+}</script>
+    <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why did GhostPDF switch Word to PDF to run 100% in the browser?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Browser-based Mammoth + jsPDF conversion works permanently with zero server downtime, zero upload wait, and complete document privacy."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I convert password-protected resumes back into Word after editing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, for unlocked digital PDFs use PDF to Word cleanly locally; if locked, unlock first via GhostPDF Unlock PDF using your authorized password."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Word to PDF stamp branding footers onto my resume or contract?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Never. Every generated PDF is completely clean and watermark-free."
+      }
+    }
+  ]
+}</script>
+    <script defer src="../../js/utils.js"></script>
+</body>
+</html>

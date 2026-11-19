@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+    <title>How to Assemble, Number, and Redact Legal Exhibit PDFs | GhostPDF Guides</title>
+    <meta name="description" content="Keep client confidentiality intact offline while combining exhibits, adding sequential numbering, and burning permanent redactions.">
+    <meta name="keywords" content="merge pdf, page numbers, organization &amp; printing, client-side pdf tool, ghostpdf">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://ghostpdf.tech/blog/prepare-court-and-legal-exhibits-in-pdf/">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ghostpdf.tech/blog/prepare-court-and-legal-exhibits-in-pdf/">
+    <meta property="og:title" content="How to Assemble, Number, and Redact Legal Exhibit PDFs">
+    <meta property="og:description" content="Keep client confidentiality intact offline while combining exhibits, adding sequential numbering, and burning permanent redactions.">
+    <meta property="og:image" content="https://ghostpdf.tech/assets/android-chrome-512x512.png">
+    <meta property="og:site_name" content="GhostPDF">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://ghostpdf.tech/blog/prepare-court-and-legal-exhibits-in-pdf/">
+    <meta name="twitter:title" content="How to Assemble, Number, and Redact Legal Exhibit PDFs">
+    <meta name="twitter:description" content="Keep client confidentiality intact offline while combining exhibits, adding sequential numbering, and burning permanent redactions.">
+    <meta name="twitter:image" content="https://ghostpdf.tech/assets/android-chrome-512x512.png">
+    <meta name="theme-color" content="#dc143c">
+    <link rel="icon" href="../../assets/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="96x96" href="../../assets/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"></noscript>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+</head>
+<body>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="container">
+            <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/"><span itemprop="name">Home</span></a>
+                    <meta itemprop="position" content="1" />
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/blog/"><span itemprop="name">Blog</span></a>
+                    <meta itemprop="position" content="2" />
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/blog/prepare-court-and-legal-exhibits-in-pdf/"><span itemprop="name">How to Assemble, Number, and Redact Legal Exhibit PDFs</span></a>
+                    <meta itemprop="position" content="3" />
+                </li>
+            </ol>
+        </div>
+    </nav>
+
+    <nav class="navbar">
+        <a href="../../" class="logo"><img src="../../assets/favicon-96x96.png" alt="GhostPDF logo" width="34" height="34" decoding="async"> GhostPDF</a>
+        <div class="nav-links">
+            <a href="../../">All Tools</a>
+            <a href="../" class="active">Blog</a>
+            <a href="../../merge-pdf/" class="nav-extra">Merge PDF</a>
+        </div>
+    </nav>
+
+    <button id="theme-toggle" class="theme-ribbon-toggle" aria-label="Toggle dark mode">
+        <span class="ribbon-sun-wrapper">
+            <svg class="ribbon-sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+        </span>
+        <span class="ribbon-bookmark">
+            <svg class="ribbon-moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </span>
+    </button>
+
+    <main class="container" style="padding-top: 1.5rem; padding-bottom: 4rem;">
+        <div class="blog-layout">
+            <article class="blog-article">
+                <div class="blog-byline">
+                    <span class="blog-badge">Organization &amp; Printing</span>
+                    <span><i class="fa-regular fa-clock"></i> 4 min read</span>
+                    <span><i class="fa-regular fa-calendar"></i> Updated Nov 15, 2026</span>
+                </div>
+
+                <h1>How to Assemble, Number, and Redact Legal Exhibit PDFs</h1>
+                <p class="blog-lead">Keep client confidentiality intact offline while combining exhibits, adding sequential numbering, and burning permanent redactions.</p>
+
+                <div class="blog-takeaways">
+                    <strong>Key Takeaways</strong>
+                    <ul>
+                        <li><strong>Workflow Scope:</strong> How to Assemble, Number, and Redact Legal Exhibit PDFs &mdash; organized into 4 browser-local stages via <a href="../../merge-pdf/">Merge PDF</a> with zero file uploads.</li>
+                        <li><strong>Decision Matrix (Compliance Requirement):</strong> Side-by-side comparison covering Sequential Page Citations, Privileged Identity Protection, Internal Workstation Hygiene inside the interactive organization &amp; printing benchmark table below.</li>
+                        <li><strong>Quality Safeguard:</strong> Verify Flattened Static Layers Before Submitting Fillable Court Forms &mdash; backed by 3 production checks and 3 technical FAQs before final export.</li>
+                    </ul>
+                </div>
+
+                <h2 id="section-why">1. Court Filing Standards: Clean Exhibits, Continuous Numbering &amp; Zero Data Leaks</h2>
+                <p>Litigation paralegals and legal teams preparing hearing binders, arbitration exhibits, and FOIA disclosures navigate unforgiving technical demands: disparate email printouts and contract attachments must appear cleanly ordered inside unified packets, bear crisp consecutive page numbering for oral argument citations, strip privileged internal software metadata, and permanently annihilate redacted client SSNs or settlement figures.</p>
+                <p>Because client confidentiality rules prohibit uploading active discovery packets to consumer cloud PDF sites, executing every assembly, numbering, redaction, and metadata check purely inside browser RAM protects attorney-client privilege completely while hitting courtroom readiness standards.</p>
+
+                <h2 id="section-steps">2. End-to-End Court Exhibit Preparation Workflow Offline</h2>
+                <ol class="blog-steps">
+                    <li><strong>Convert Photo Evidence &amp; Assemble Exhibits:</strong> Turn field photographs cleanly into PDFs via <a href="../../image-to-pdf/">Image to PDF</a>, then sequence all exhibits chronologically in <a href="../../merge-pdf/">Merge PDF</a>.</li>
+                    <li><strong>Standardize Orientation &amp; Margins:</strong> Rotate sideways receipts upright cleanly via <a href="../../rotate-pdf/">Rotate PDF</a> and clip scanner edge noise via <a href="../../crop-pdf/">Crop PDF</a>.</li>
+                    <li><strong>Burn Destructive Pixel Redactions on Sealed Sections:</strong> Open <a href="../../redact-pdf/">Redact PDF</a> to burn black masks into pixels cleanly on every redacted SSN, minor name, or confidential bank field—verifying afterward with <code>Ctrl+F</code>.</li>
+                    <li><strong>Number Consecutively &amp; Scrub Hidden Metadata:</strong> Apply <code>Page X of N</code> footers cleanly via <a href="../../page-numbers-pdf/">Page Numbers</a>, erase draft usernames in <a href="../../pdf-metadata/">PDF Metadata</a>, and verify megabyte court e-filing caps via <a href="../../compress-pdf/">Compress PDF</a>.</li>
+                </ol>
+
+                <h2 id="section-comparison">3. Court E-Filing Readiness Checklist Across GhostPDF Tools</h2>
+                <div class="blog-table-wrap">
+                    <table class="blog-table">
+                        <thead>
+                            <tr><th>Compliance Requirement</th><th>Exact GhostPDF Tool</th><th>Why It Prevents Rejection / Sanctions</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Sequential Page Citations</td><td>Page Numbers (<code>Page X of N</code>)</td><td>Gives judges &amp; opposing counsel exact page reference</td></tr>
+                            <tr><td>Privileged Identity Protection</td><td>Redact PDF (Pixel Burn)</td><td>Prevents <code>Ctrl+C</code> scraping beneath black bars</td></tr>
+                            <tr><td>Internal Workstation Hygiene</td><td>PDF Metadata</td><td>Strips paralegal Author tags &amp; draft filenames</td></tr>
+                            <tr><td>ECF / Court File Size Limits</td><td>Compress PDF (Medium / Low)</td><td>Meets strict e-filing attachment caps cleanly</td></tr>
+                            <tr><td>Frozen Signature Exhibits</td><td>Flatten PDF</td><td>Ensures filled form answers never drop on clerk viewers</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 id="section-pitfalls">4. Critical Quality Gates Before Clerk E-Filing</h2>
+                <ul class="blog-pitfalls">
+                    <li><strong>Verify Flattened Static Layers Before Submitting Fillable Court Forms:</strong> Never leave live editable <code>/AcroForm</code> fields inside final motions—run <a href="../../flatten-pdf/">Flatten PDF</a> so checkmarks and monetary amounts always print cleanly.</li>
+                    <li><strong>Compare Pre- &amp; Post-Redacted Bundles Side by Side:</strong> Sanity-check redacted exhibits quickly beside unredacted working files via <a href="../../compare-pdf/">Compare PDF</a> so nothing unintended got masked or skipped.</li>
+                    <li><strong>Number *Only* After All Deletions &amp; Merges Finish:</strong> Adding page numbers before finalizing page order creates skipped counts—save numbering cleanly for the end.</li>
+                </ul>
+
+                <h2 id="section-faq">5. Frequently Asked Questions</h2>
+                <div class="faq-list" style="margin-top:1rem;">
+                <div class="faq-item glass-card" style="margin-bottom: 0.75rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="b-faq-1">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question" style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Can GhostPDF guarantee zero privileged exhibits leave our law firm network?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="b-faq-1" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Yes. Every tool executes client-side via static JS/WASM assets inside local browser RAM—zero uploaded files reach GhostPDF or external conversion APIs.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card" style="margin-bottom: 0.75rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="b-faq-2">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question" style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Why must legal teams use pixel-burn redaction instead of Mac Preview black rectangles?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="b-faq-2" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Overlay shapes leave underlying searchable Unicode text readable via Copy-Paste or <code>pdftotext</code> tools—only flattened rasterized masks via Redact PDF destroy sensitive text permanently.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card" style="margin-bottom: 0.75rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="b-faq-3">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question" style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            How do I keep a 150-page exhibit binder under court 25 MB ECF caps cleanly?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="b-faq-3" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Prune blank scans first via Organize &amp; Edit PDF, apply Grayscale if B&amp;W legal text allows, then finish cleanly with Medium Compress PDF.</p>
+                    </div>
+                </div>
+                </div>
+
+                <div class="blog-callout">
+                    <div>
+                        <strong style="display:block;font-size:1.05rem;color:hsl(var(--text-main));">Launch Merge PDF Free</strong>
+                        <span style="color:hsl(var(--text-muted));font-size:0.9rem;">Combine multiple PDFs into one unified document.</span>
+                    </div>
+                    <a href="../../merge-pdf/" class="btn btn-primary">Open Merge PDF</a>
+                </div>
+
+                <h2 style="margin-top: 2.5rem;">Related PDF Guides</h2>
+                <div class="blog-related-grid">
+                    <a href="../compress-portfolio-pdfs-without-blurry-images/" class="glass-card blog-card" style="padding:1.25rem;">
+                        <span class="blog-badge">Organization &amp; Printing</span>
+                        <h3 style="font-size:1rem;line-height:1.35;color:hsl(var(--text-main));margin:0;">How to Compress Design Portfolio PDFs Without Ruining Image Sharpness</h3>
+                        <span style="font-size:0.82rem;color:hsl(var(--primary));font-weight:600;">Read guide &rarr;</span>
+                    </a>
+                    <a href="../split-single-pages-from-scanned-packet/" class="glass-card blog-card" style="padding:1.25rem;">
+                        <span class="blog-badge">Organization &amp; Printing</span>
+                        <h3 style="font-size:1rem;line-height:1.35;color:hsl(var(--text-main));margin:0;">How to Extract Only the Pages You Need from a 100-Page PDF</h3>
+                        <span style="font-size:0.82rem;color:hsl(var(--primary));font-weight:600;">Read guide &rarr;</span>
+                    </a>
+                    <a href="../prepare-resume-pdf-for-ats-systems/" class="glass-card blog-card" style="padding:1.25rem;">
+                        <span class="blog-badge">Organization &amp; Printing</span>
+                        <h3 style="font-size:1rem;line-height:1.35;color:hsl(var(--text-main));margin:0;">Resume PDF Best Practices: Metadata, File Size, and Clean Fonts</h3>
+                        <span style="font-size:0.82rem;color:hsl(var(--primary));font-weight:600;">Read guide &rarr;</span>
+                    </a>
+                </div>
+            </article>
+
+            <aside class="blog-sidebar">
+                <div class="blog-sidebar-card">
+                    <h3>Recommended Tool</h3>
+                    <p style="font-size:0.88rem;color:hsl(var(--text-muted));margin-bottom:1rem;">Combine multiple PDFs into one unified document.</p>
+                    <a href="../../merge-pdf/" class="btn btn-primary" style="width:100%;margin-bottom:0.65rem;">Use Merge PDF</a>
+                    <a href="../../page-numbers-pdf/" class="btn btn-secondary" style="width:100%;">Pair with Page Numbers</a>
+                </div>
+
+                <div class="blog-sidebar-card">
+                    <h3>On This Page</h3>
+                    <ul class="blog-toc">
+                        <li><a href="#section-why">1. Court Filing Standards: Clean Exhibits, Continuous Numbering &amp; Zero Data Leaks</a></li>
+                        <li><a href="#section-steps">2. End-to-End Court Exhibit Preparation Workflow Offline</a></li>
+                        <li><a href="#section-comparison">3. Court E-Filing Readiness Checklist Across GhostPDF Tools</a></li>
+                        <li><a href="#section-pitfalls">4. Critical Quality Gates Before Clerk E-Filing</a></li>
+                        <li><a href="#section-faq">5. Frequently Asked Questions</a></li>
+                    </ul>
+                </div>
+
+                <div class="blog-sidebar-card">
+                    <h3>Browse Library</h3>
+                    <p style="font-size:0.85rem;color:hsl(var(--text-muted));margin-bottom:0.85rem;">All 26 client-side PDF utilities and 50 practical guides.</p>
+                    <a href="../../" class="btn btn-secondary" style="width:100%;margin-bottom:0.5rem;">All 26 PDF Tools</a>
+                    <a href="../" class="btn btn-secondary" style="width:100%;">All 50 Blog Guides</a>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="seo-footer">
+        <div class="seo-footer-grid">
+            <div class="seo-footer-brand">
+                <h3>GhostPDF</h3>
+                <p>Free, private, browser-based PDF tools with zero file uploads, no watermarks, and no registration required. All 26 tools process files locally on your device.</p>
+                <p style="margin-top:0.75rem;"><a href="../../blog/" style="color:hsl(var(--primary));font-weight:600;text-decoration:none;">Explore 50 PDF Guides &rarr;</a></p>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Organize, Edit &amp; Sign</h4>
+                <ul>
+                    <li><a href="../../merge-pdf/">Merge PDF</a></li>
+                    <li><a href="../../split-pdf/">Split PDF</a></li>
+                    <li><a href="../../rotate-pdf/">Rotate PDF</a></li>
+                    <li><a href="../../edit-pdf/">Organize &amp; Edit PDF</a></li>
+                    <li><a href="../../crop-pdf/">Crop PDF</a></li>
+                    <li><a href="../../nup-pdf/">Pages per Sheet</a></li>
+                    <li><a href="../../watermark-pdf/">Watermark PDF</a></li>
+                    <li><a href="../../page-numbers-pdf/">Page Numbers</a></li>
+                    <li><a href="../../sign-pdf/">Sign PDF</a></li>
+                </ul>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Convert &amp; Extract</h4>
+                <ul>
+                    <li><a href="../../image-to-pdf/">Image to PDF</a></li>
+                    <li><a href="../../pdf-to-image/">PDF to Image</a></li>
+                    <li><a href="../../extract-images/">Extract Images</a></li>
+                    <li><a href="../../word-to-pdf/">Word to PDF</a></li>
+                    <li><a href="../../pdf-to-word/">PDF to Word</a></li>
+                    <li><a href="../../excel-to-pdf/">Excel / CSV to PDF</a></li>
+                    <li><a href="../../html-to-pdf/">HTML / MD to PDF</a></li>
+                    <li><a href="../../pdf-to-markdown/">PDF to Markdown</a></li>
+                    <li><a href="../../pdf-ocr/">PDF OCR</a></li>
+                </ul>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Security &amp; Optimize</h4>
+                <ul>
+                    <li><a href="../../redact-pdf/">Redact PDF</a></li>
+                    <li><a href="../../lock-pdf/">Lock PDF</a></li>
+                    <li><a href="../../unlock-pdf/">Unlock PDF</a></li>
+                    <li><a href="../../flatten-pdf/">Flatten PDF</a></li>
+                    <li><a href="../../pdf-metadata/">PDF Metadata</a></li>
+                    <li><a href="../../compare-pdf/">Compare PDF</a></li>
+                    <li><a href="../../compress-pdf/">Compress PDF</a></li>
+                    <li><a href="../../grayscale-pdf/">Grayscale / Invert PDF</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="seo-footer-bottom">
+            <p>&copy; 2026 GhostPDF. 100% Client-Side, Free &amp; Private PDF Tools.</p>
+        </div>
+    </footer>
+
+    <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Assemble, Number, and Redact Legal Exhibit PDFs",
+  "description": "Keep client confidentiality intact offline while combining exhibits, adding sequential numbering, and burning permanent redactions.",
+  "image": "https://ghostpdf.tech/assets/android-chrome-512x512.png",
+  "articleSection": "Organization & Printing",
+  "wordCount": 683,
+  "author": {
+    "@type": "Organization",
+    "name": "GhostPDF",
+    "url": "https://ghostpdf.tech/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "GhostPDF",
+    "url": "https://ghostpdf.tech/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ghostpdf.tech/assets/android-chrome-512x512.png"
+    }
+  },
+  "datePublished": "2026-11-15",
+  "dateModified": "2026-11-15",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ghostpdf.tech/blog/prepare-court-and-legal-exhibits-in-pdf/"
+  }
+}</script>
+    <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ghostpdf.tech/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ghostpdf.tech/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "How to Assemble, Number, and Redact Legal Exhibit PDFs",
+      "item": "https://ghostpdf.tech/blog/prepare-court-and-legal-exhibits-in-pdf/"
+    }
+  ]
+}</script>
+    <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can GhostPDF guarantee zero privileged exhibits leave our law firm network?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Every tool executes client-side via static JS/WASM assets inside local browser RAM—zero uploaded files reach GhostPDF or external conversion APIs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why must legal teams use pixel-burn redaction instead of Mac Preview black rectangles?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Overlay shapes leave underlying searchable Unicode text readable via Copy-Paste or pdftotext tools—only flattened rasterized masks via Redact PDF destroy sensitive text permanently."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I keep a 150-page exhibit binder under court 25 MB ECF caps cleanly?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Prune blank scans first via Organize & Edit PDF, apply Grayscale if B&W legal text allows, then finish cleanly with Medium Compress PDF."
+      }
+    }
+  ]
+}</script>
+    <script defer src="../../js/utils.js"></script>
+</body>
+</html>

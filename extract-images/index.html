@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+    <title>Extract Images from PDF Online Free – Download ZIP | GhostPDF</title>
+    <meta name="title" content="Extract Images from PDF Online Free – Download ZIP | GhostPDF">
+    <meta name="description" content="Extract all embedded images from PDF files online for free in your browser. Preview extracted PNG images and download them as a ZIP file.">
+    <meta name="keywords" content="extract images from pdf, pdf image extractor free, get images out of pdf, save embedded pdf images zip">
+    <meta name="author" content="GhostPDF">
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ghostpdf.tech/extract-images/">
+    <meta property="og:title" content="Extract Images from PDF Online Free – Download ZIP | GhostPDF">
+    <meta property="og:description" content="Extract all embedded images from PDF files online for free in your browser. Preview extracted PNG images and download them as a ZIP file.">
+    <meta property="og:image" content="https://ghostpdf.tech/assets/android-chrome-512x512.png">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://ghostpdf.tech/extract-images/">
+    <meta property="twitter:title" content="Extract Images from PDF Online Free – Download ZIP | GhostPDF">
+    <meta property="twitter:description" content="Extract all embedded images from PDF files online for free in your browser. Preview extracted PNG images and download them as a ZIP file.">
+    <meta name="twitter:image" content="https://ghostpdf.tech/assets/android-chrome-512x512.png">
+    <link rel="canonical" href="https://ghostpdf.tech/extract-images/">
+    <link rel="icon" href="../assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="96x96" href="../assets/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
+    <link rel="manifest" href="../assets/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"></noscript>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"></noscript>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="container">
+            <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/"><span itemprop="name">Home</span></a>
+                    <meta itemprop="position" content="1" />
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/extract-images/"><span itemprop="name">Extract Images</span></a>
+                    <meta itemprop="position" content="2" />
+                </li>
+            </ol>
+        </div>
+    </nav>
+
+    <nav class="navbar">
+        <a href="../" class="logo"><img src="../assets/favicon-96x96.png" alt="GhostPDF logo" width="34" height="34" decoding="async"> GhostPDF</a>
+        <div class="nav-links">
+            <a href="../">All Tools</a>
+            <a href="../blog/">Blog</a>
+            <a href="./" class="active">Extract Images</a>
+        </div>
+    </nav>
+
+    <button id="theme-toggle" class="theme-ribbon-toggle" aria-label="Toggle dark mode">
+        <span class="ribbon-sun-wrapper">
+            <svg class="ribbon-sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+        </span>
+        <span class="ribbon-bookmark">
+            <svg class="ribbon-moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </span>
+    </button>
+
+    <main class="container">
+        <header style="text-align: center; margin-bottom: 3rem;">
+            <h1><span class="text-gradient">Extract Images</span> from PDF</h1>
+            <p style="color: hsl(var(--text-muted)); margin-top: 0.5rem;">Pull embedded photos, diagrams, and graphics out of any PDF and download them together as a ZIP archive.</p>
+        </header>
+        
+        <div class="glass-card" style="max-width: 820px; margin: 0 auto;">
+            <div id="drop-zone" class="drop-zone" style="width:100%;">
+                <i class="fa-solid fa-photo-film"></i>
+                <div class="drop-text">Drag &amp; Drop your PDF here <br> or click to browse</div>
+            </div>
+            <input type="file" id="file-input" accept="application/pdf,.pdf" hidden>
+
+            <div id="extract-stage" style="display:none;width:100%;text-align:left;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;padding:0.9rem 1rem;border:1px solid var(--glass-border);border-radius:var(--radius-sm);">
+                    <div><strong id="file-name">document.pdf</strong><div id="file-meta" style="font-size:0.85rem;color:hsl(var(--text-muted));"></div></div>
+                    <button type="button" class="btn btn-secondary" onclick="resetExtractTool()">Change PDF</button>
+                </div>
+                <div id="image-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem;margin-bottom:1.25rem;"></div>
+                <button type="button" id="download-zip-btn" class="btn btn-primary" style="width:100%;">Download All Images (.ZIP)</button>
+            </div>
+        </div>
+
+        <section class="container" style="margin-top: 4rem; max-width: 800px;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">How to Use Extract Images</h2>
+            <div class="steps" style="display: grid; gap: 1.5rem;">
+                <div class="step-card glass-card"><h3>1. Load Your PDF</h3><p>Drop any PDF containing photos, charts, or embedded artwork into the box above.</p></div>
+                <div class="step-card glass-card"><h3>2. Preview Extracted Images</h3><p>GhostPDF scans every page operator stream locally and displays all embedded raster images.</p></div>
+                <div class="step-card glass-card"><h3>3. Download ZIP Archive</h3><p>Click Download All Images (.ZIP) to save every extracted PNG in one bundle.</p></div>
+            </div>
+        </section>
+
+        <section class="container" style="margin-top: 4rem; max-width: 800px; padding-bottom: 4rem;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Frequently Asked Questions</h2>
+            <div class="faq-accordion">
+
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="extract-images-faq-1">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question" style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            How is Extract Images different from PDF to Image?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="extract-images-faq-1" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">PDF to Image converts entire pages into images; Extract Images pulls out the individual embedded photos inside the PDF without surrounding text.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="extract-images-faq-2">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question" style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Are my PDFs uploaded to extract images?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="extract-images-faq-2" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">No. All image extraction happens locally in your browser.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="extract-images-faq-3">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question" style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            What format are extracted images saved in?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="extract-images-faq-3" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Extracted images are saved as lossless PNG files bundled inside a single .zip archive.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="extract-images-faq-4">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question" style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            What if my PDF has no embedded raster images?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="extract-images-faq-4" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">If a PDF contains only vector graphics or text, use our PDF to Image tool to render full pages instead.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="extract-images-faq-5">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question" style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Is there any limit on the number of images?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="extract-images-faq-5" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">No, GhostPDF extracts all embedded images for free with no limits.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container" style="margin-top: 4rem; max-width: 800px; padding-bottom: 2rem;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">More PDF Tools</h2>
+            <div class="grid-tools" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+
+                <a href="../merge-pdf/" class="glass-card" style="padding: 1.5rem;">
+                    <i class="fa-solid fa-object-group" style="font-size: 2rem; color: hsl(var(--primary)); margin-bottom: 0.75rem;"></i>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Merge PDF</h3>
+                    <p style="font-size: 0.85rem; color: hsl(var(--text-muted));">Combine multiple PDFs into one file.</p>
+                </a>
+
+                <a href="../split-pdf/" class="glass-card" style="padding: 1.5rem;">
+                    <i class="fa-solid fa-scissors" style="font-size: 2rem; color: hsl(var(--primary)); margin-bottom: 0.75rem;"></i>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Split PDF</h3>
+                    <p style="font-size: 0.85rem; color: hsl(var(--text-muted));">Separate PDF pages into individual files.</p>
+                </a>
+
+                <a href="../rotate-pdf/" class="glass-card" style="padding: 1.5rem;">
+                    <i class="fa-solid fa-rotate-right" style="font-size: 2rem; color: hsl(var(--primary)); margin-bottom: 0.75rem;"></i>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Rotate PDF</h3>
+                    <p style="font-size: 0.85rem; color: hsl(var(--text-muted));">Rotate single or all pages permanently.</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="seo-footer">
+        <div class="seo-footer-grid">
+            <div class="seo-footer-brand">
+                <h3>GhostPDF</h3>
+                <p>Free, private, browser-based PDF tools with zero file uploads, no watermarks, and no registration required. All 26 tools process files locally on your device.</p>
+                <p style="margin-top:0.75rem;"><a href="../blog/" style="color:hsl(var(--primary));font-weight:600;text-decoration:none;">Explore 50 PDF Guides &rarr;</a></p>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Organize, Edit &amp; Sign</h4>
+                <ul>
+                    <li><a href="../merge-pdf/">Merge PDF</a></li>
+                    <li><a href="../split-pdf/">Split PDF</a></li>
+                    <li><a href="../rotate-pdf/">Rotate PDF</a></li>
+                    <li><a href="../edit-pdf/">Organize & Edit PDF</a></li>
+                    <li><a href="../crop-pdf/">Crop PDF</a></li>
+                    <li><a href="../nup-pdf/">Pages per Sheet</a></li>
+                    <li><a href="../watermark-pdf/">Watermark PDF</a></li>
+                    <li><a href="../page-numbers-pdf/">Page Numbers</a></li>
+                    <li><a href="../sign-pdf/">Sign PDF</a></li>
+                </ul>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Convert &amp; Extract</h4>
+                <ul>
+                    <li><a href="../image-to-pdf/">Image to PDF</a></li>
+                    <li><a href="../pdf-to-image/">PDF to Image</a></li>
+                    <li><a href="../extract-images/">Extract Images</a></li>
+                    <li><a href="../word-to-pdf/">Word to PDF</a></li>
+                    <li><a href="../pdf-to-word/">PDF to Word</a></li>
+                    <li><a href="../excel-to-pdf/">Excel / CSV to PDF</a></li>
+                    <li><a href="../html-to-pdf/">HTML / MD to PDF</a></li>
+                    <li><a href="../pdf-to-markdown/">PDF to Markdown</a></li>
+                    <li><a href="../pdf-ocr/">PDF OCR</a></li>
+                </ul>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Security &amp; Optimize</h4>
+                <ul>
+                    <li><a href="../redact-pdf/">Redact PDF</a></li>
+                    <li><a href="../lock-pdf/">Lock PDF</a></li>
+                    <li><a href="../unlock-pdf/">Unlock PDF</a></li>
+                    <li><a href="../flatten-pdf/">Flatten PDF</a></li>
+                    <li><a href="../pdf-metadata/">PDF Metadata</a></li>
+                    <li><a href="../compare-pdf/">Compare PDF</a></li>
+                    <li><a href="../compress-pdf/">Compress PDF</a></li>
+                    <li><a href="../grayscale-pdf/">Grayscale / Invert PDF</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="seo-footer-bottom">
+            <p>&copy; 2026 GhostPDF. 100% Client-Side, Free &amp; Private PDF Tools.</p>
+        </div>
+    </footer>
+
+    <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Extract Images Online - GhostPDF",
+  "url": "https://ghostpdf.tech/extract-images/",
+  "description": "Extract all embedded images from PDF files online for free in your browser. Preview extracted PNG images and download them as a ZIP file.",
+  "applicationCategory": "Productivity",
+  "operatingSystem": "All",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}</script>
+    <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How is Extract Images different from PDF to Image?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "PDF to Image converts entire pages into images; Extract Images pulls out the individual embedded photos inside the PDF without surrounding text."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are my PDFs uploaded to extract images?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. All image extraction happens locally in your browser."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What format are extracted images saved in?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Extracted images are saved as lossless PNG files bundled inside a single .zip archive."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if my PDF has no embedded raster images?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If a PDF contains only vector graphics or text, use our PDF to Image tool to render full pages instead."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there any limit on the number of images?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, GhostPDF extracts all embedded images for free with no limits."
+      }
+    }
+  ]
+}</script>
+    <script defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script defer src="../js/utils.js"></script>
+    <script defer src="extract-images.js"></script>
+</body>
+</html>

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+
+    <!-- Primary Meta Tags -->
+    <title>PDF to Image Converter – Convert PDF to JPG/PNG | GhostPDF</title>
+    <meta name="title" content="PDF to Image Converter – Convert PDF to JPG/PNG Free | GhostPDF">
+    <meta name="description"
+        content="Convert PDF pages to high-quality images (JPG or PNG) online. Fast and secure. Download all pages as a ZIP.">
+    <meta name="keywords"
+        content="PDF to image, PDF to JPG, PDF to PNG, PDF converter, image converter, page converter">
+    <meta name="author" content="GhostPDF">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ghostpdf.tech/pdf-to-image/">
+    <meta property="og:title" content="PDF to Image Converter">
+    <meta property="og:description" content="Convert PDF pages to JPG or PNG images online for free.">
+    <meta property="og:image" content="https://ghostpdf.tech/assets/android-chrome-512x512.png">
+
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://ghostpdf.tech/pdf-to-image/">
+    <meta property="twitter:title" content="PDF to Image Converter">
+    <meta property="twitter:description" content="Convert PDF to images online.">
+    <meta name="twitter:image" content="https://ghostpdf.tech/assets/android-chrome-512x512.png">
+
+    <link rel="canonical" href="https://ghostpdf.tech/pdf-to-image/">
+    <link rel="icon" href="../assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="96x96" href="../assets/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
+    <link rel="manifest" href="../assets/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"></noscript>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"></noscript>
+
+    <!-- Libraries -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+
+<body>
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="container">
+            <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/">
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1" />
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a itemprop="item" href="https://ghostpdf.tech/pdf-to-image/">
+                        <span itemprop="name">PDF to Image</span>
+                    </a>
+                    <meta itemprop="position" content="2" />
+                </li>
+            </ol>
+        </div>
+    </nav>
+
+    <nav class="navbar">
+        <a href="../" class="logo">
+            <img src="../assets/favicon-96x96.png" alt="GhostPDF logo" width="34" height="34" decoding="async"> GhostPDF
+        </a>
+        <div class="nav-links">
+            <a href="../">All Tools</a>
+            <a href="./" class="active">PDF to Image</a>
+        </div>
+    </nav>
+
+    <button id="theme-toggle" class="theme-ribbon-toggle" aria-label="Toggle dark mode">
+        <span class="ribbon-sun-wrapper">
+            <svg class="ribbon-sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+        </span>
+        <span class="ribbon-bookmark">
+            <svg class="ribbon-moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </span>
+    </button>
+
+    <main class="container">
+        <header style="text-align: center; margin-bottom: 3rem;">
+            <h1><span class="text-gradient">PDF to Image</span> Converter</h1>
+            <p style="color: hsl(var(--text-muted)); margin-top: 0.5rem;">Extract pages from your PDF as high-quality
+                JPG or PNG images.</p>
+        </header>
+
+        <div class="glass-card" style="max-width: 600px; margin: 0 auto;">
+            <div id="drop-zone" class="drop-zone">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <div class="drop-text">Drag & Drop PDF file here <br> or click to browse</div>
+            </div>
+            <input type="file" id="file-input" accept="application/pdf" hidden>
+
+            <div id="convert-stage" style="display: none; width: 100%; text-align: left;">
+                <div class="file-info"
+                    style="margin-bottom: 2rem; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); padding: 1rem; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h4 id="file-name">filename.pdf</h4>
+                        <span id="page-count"
+                            style="color: hsl(var(--text-muted)); font-size: 0.9rem;">Loading...</span>
+                    </div>
+                    <button onclick="resetFile()" title="Remove PDF"
+                        style="background:none; border:none; color: #ff6b6b; cursor: pointer; padding: 0.5rem;">
+                        <i class="fa-solid fa-xmark fa-lg"></i>
+                    </button>
+                </div>
+
+                <div class="options" style="margin-bottom: 2rem;">
+                    <label style="display: block; margin-bottom: 0.5rem;">Image Format</label>
+                    <select id="format-select"
+                        style="width: 100%; padding: 0.8rem; border-radius: var(--radius-sm); background: hsl(var(--bg-card)); color: hsl(var(--text-main)); border: 1px solid var(--glass-border);">
+                        <option value="jpeg">JPG (Best for photos/scans)</option>
+                        <option value="png">PNG (Best for text/crispness)</option>
+                    </select>
+                </div>
+
+                <div id="progress-container" style="display: none; margin-bottom: 1rem;">
+                    <div
+                        style="background: rgba(255,255,255,0.1); border-radius: 10px; height: 10px; overflow: hidden;">
+                        <div id="progress-bar"
+                            style="width: 0%; height: 100%; background: hsl(var(--primary)); transition: width 0.3s;">
+                        </div>
+                    </div>
+                    <p id="progress-text"
+                        style="text-align: center; color: hsl(var(--text-muted)); font-size: 0.9rem; margin-top: 0.5rem;">
+                        Converting...</p>
+                </div>
+
+                <button id="convert-btn" class="btn btn-primary" style="width: 100%;">Convert to Images</button>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results-section" style="display: none; width: 100%; margin-top: 2rem;">
+                <div class="toolbar"
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h3>Converted Images</h3>
+                    <button id="download-all-btn" class="btn btn-primary">
+                        <i class="fa-solid fa-file-zipper"></i> Download All (Zip)
+                    </button>
+                </div>
+
+                <div id="grid-wrapper"
+                    style="max-height: 500px; overflow-y: auto; padding-right: 0.5rem; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.05);">
+                    <div id="image-grid" class="image-grid">
+                        <!-- Cards injected here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Image Preview Modal -->
+        <div id="image-preview-modal" class="modal-overlay" onclick="closePreview()">
+            <div class="modal-content glass-card"
+                style="max-width: 90vw; max-height: 90vh; width: auto; padding: 1rem; background: rgba(0,0,0,0.9); border: none;"
+                onclick="event.stopPropagation()">
+                <div style="text-align: right; margin-bottom: 0.5rem;">
+                    <button onclick="closePreview()"
+                        style="background: none; border: none; color: #fff; cursor: pointer; font-size: 1.5rem;">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <img id="preview-image" src="" style="max-width: 100%; max-height: 80vh; object-fit: contain;">
+            </div>
+        </div>
+
+        <style>
+            .image-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 1.5rem;
+                margin-bottom: 2rem;
+                padding: 1rem;
+            }
+
+            .page-card {
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid var(--glass-border);
+                border-radius: var(--radius-sm);
+                overflow: hidden;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                transition: transform 0.2s;
+            }
+
+            .page-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .page-preview {
+                height: 250px;
+                background: #333;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                position: relative;
+                cursor: pointer;
+                /* Change cursor to indicate clickable */
+            }
+
+            .page-preview img {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: contain;
+                transition: transform 0.3s;
+            }
+
+            .page-preview:hover img {
+                transform: scale(1.05);
+            }
+
+            /* Overlay icon for preview */
+            .page-preview::after {
+                content: '\f00e';
+                /* fa-magnifying-glass-plus */
+                font-family: "Font Awesome 6 Free";
+                font-weight: 900;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 2rem;
+                color: rgba(255, 255, 255, 0.8);
+                opacity: 0;
+                transition: opacity 0.2s;
+                pointer-events: none;
+            }
+
+            .page-preview:hover::after {
+                opacity: 1;
+            }
+
+            .page-number-badge {
+                background: rgba(var(--primary), 0.9);
+                color: #fff;
+                padding: 0.25rem 0.5rem;
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                border-radius: 4px;
+                font-size: 0.8rem;
+                font-weight: 600;
+                z-index: 10;
+            }
+
+            .page-actions {
+                background: rgba(0, 0, 0, 0.8);
+                padding: 0.5rem;
+                display: flex;
+                gap: 0.5rem;
+            }
+
+            .page-actions button {
+                flex: 1;
+                background: transparent;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                color: #fff;
+                padding: 0.5rem;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: 0.2s;
+                font-size: 0.9rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+
+            .page-actions button:hover {
+                background: rgba(255, 255, 255, 0.1);
+                border-color: #fff;
+            }
+        </style>
+
+        <!-- How to Use Section -->
+        <section class="container" style="margin-top: 4rem; max-width: 800px;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">How to Convert PDF to Images</h2>
+            <div class="steps" style="display: grid; gap: 1.5rem;">
+                <div class="step-card glass-card">
+                    <h3>1. Upload PDF</h3>
+                    <p>Drag and drop the file you want to convert.</p>
+                </div>
+                <div class="step-card glass-card">
+                    <h3>2. Choose Format</h3>
+                    <p>Select <strong>JPG</strong> for smaller photo files or <strong>PNG</strong> for crisp text and
+                        diagrams.</p>
+                </div>
+                <div class="step-card glass-card">
+                    <h3>3. Convert</h3>
+                    <p>Download individual images or grab every page at once inside a ZIP archive.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="container" style="margin-top: 4rem; max-width: 800px; padding-bottom: 4rem;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Frequently Asked Questions</h2>
+            <div class="faq-accordion">
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="pdf2img-faq-1">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            What image resolution does PDF to Image export?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="pdf2img-faq-1" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">GhostPDF renders every PDF page at 2x scale (high-DPI
+                            clarity) so small fonts, diagrams, and charts remain legible when shared or embedded.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="pdf2img-faq-2">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Should I choose JPG or PNG output?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="pdf2img-faq-2" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Pick <strong>JPG</strong> for lighter file sizes on
+                            scanned documents and photo-heavy pages, or <strong>PNG</strong> for lossless sharpness on
+                            text, receipts, and UI wireframes.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="pdf2img-faq-3">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Can I download just one page or all pages as a ZIP?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="pdf2img-faq-3" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Both! After converting, click any page card to
+                            preview full-size and download that single page, or click "Download All (Zip)" to grab every
+                            page at once.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card" style="margin-bottom: 1rem;">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="pdf2img-faq-4">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Are my PDF files uploaded during image conversion?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="pdf2img-faq-4" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">No. Rendering uses PDF.js directly inside your browser
+                            so private documents never leave your device.</p>
+                    </div>
+                </div>
+                <div class="faq-item glass-card">
+                    <button class="faq-toggle" type="button" aria-expanded="false" aria-controls="pdf2img-faq-5">
+                        <span class="faq-question">
+                            <i class="fa-solid fa-circle-question"
+                                style="color: hsl(var(--primary)); margin-right: 0.5rem;"></i>
+                            Is PDF to JPG/PNG completely free?
+                        </span>
+                        <i class="fa-solid fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-content" id="pdf2img-faq-5" style="display: none;">
+                        <p style="color: hsl(var(--text-muted));">Yes, GhostPDF converts multi-page PDFs to JPG or PNG
+                            for free without watermarks or sign-up.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Related Tools Section -->
+        <section class="container" style="margin-top: 4rem; max-width: 800px; padding-bottom: 2rem;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">More PDF Tools</h2>
+            <div class="grid-tools"
+                style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+                <a href="../image-to-pdf/" class="glass-card" style="padding: 1.5rem;">
+                    <i class="fa-solid fa-images"
+                        style="font-size: 1.5rem; color: hsl(var(--primary)); margin-bottom: 0.5rem;"></i>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0;">Image to PDF</h3>
+                </a>
+                <a href="../merge-pdf/" class="glass-card" style="padding: 1.5rem;">
+                    <i class="fa-solid fa-object-group"
+                        style="font-size: 1.5rem; color: hsl(var(--primary)); margin-bottom: 0.5rem;"></i>
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0;">Merge PDF</h3>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="seo-footer">
+        <div class="seo-footer-grid">
+            <div class="seo-footer-brand">
+                <h3>GhostPDF</h3>
+                <p>Free, private, browser-based PDF tools with zero file uploads, no watermarks, and no registration required. All 26 tools process files locally on your device.</p>
+                <p style="margin-top:0.75rem;"><a href="../blog/" style="color:hsl(var(--primary));font-weight:600;text-decoration:none;">Explore 50 PDF Guides &rarr;</a></p>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Organize, Edit &amp; Sign</h4>
+                <ul>
+                    <li><a href="../merge-pdf/">Merge PDF</a></li>
+                    <li><a href="../split-pdf/">Split PDF</a></li>
+                    <li><a href="../rotate-pdf/">Rotate PDF</a></li>
+                    <li><a href="../edit-pdf/">Organize & Edit PDF</a></li>
+                    <li><a href="../crop-pdf/">Crop PDF</a></li>
+                    <li><a href="../nup-pdf/">Pages per Sheet</a></li>
+                    <li><a href="../watermark-pdf/">Watermark PDF</a></li>
+                    <li><a href="../page-numbers-pdf/">Page Numbers</a></li>
+                    <li><a href="../sign-pdf/">Sign PDF</a></li>
+                </ul>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Convert &amp; Extract</h4>
+                <ul>
+                    <li><a href="../image-to-pdf/">Image to PDF</a></li>
+                    <li><a href="../pdf-to-image/">PDF to Image</a></li>
+                    <li><a href="../extract-images/">Extract Images</a></li>
+                    <li><a href="../word-to-pdf/">Word to PDF</a></li>
+                    <li><a href="../pdf-to-word/">PDF to Word</a></li>
+                    <li><a href="../excel-to-pdf/">Excel / CSV to PDF</a></li>
+                    <li><a href="../html-to-pdf/">HTML / MD to PDF</a></li>
+                    <li><a href="../pdf-to-markdown/">PDF to Markdown</a></li>
+                    <li><a href="../pdf-ocr/">PDF OCR</a></li>
+                </ul>
+            </div>
+            <div class="seo-footer-col">
+                <h4>Security &amp; Optimize</h4>
+                <ul>
+                    <li><a href="../redact-pdf/">Redact PDF</a></li>
+                    <li><a href="../lock-pdf/">Lock PDF</a></li>
+                    <li><a href="../unlock-pdf/">Unlock PDF</a></li>
+                    <li><a href="../flatten-pdf/">Flatten PDF</a></li>
+                    <li><a href="../pdf-metadata/">PDF Metadata</a></li>
+                    <li><a href="../compare-pdf/">Compare PDF</a></li>
+                    <li><a href="../compress-pdf/">Compress PDF</a></li>
+                    <li><a href="../grayscale-pdf/">Grayscale / Invert PDF</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="seo-footer-bottom">
+            <p>&copy; 2026 GhostPDF. 100% Client-Side, Free &amp; Private PDF Tools.</p>
+        </div>
+    </footer>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "GhostPDF PDF to Image Converter",
+      "description": "Convert PDF pages into high-resolution JPG or PNG images online for free. Preview pages and download individually or as a ZIP archive locally in your browser.",
+      "url": "https://ghostpdf.tech/pdf-to-image/",
+      "applicationCategory": "Productivity",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What image resolution does PDF to Image export?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GhostPDF renders every PDF page at 2x scale (high-DPI clarity) so small fonts, diagrams, and charts remain legible when shared or embedded."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I choose JPG or PNG output?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pick JPG for lighter file sizes on scanned documents and photo-heavy pages, or PNG for lossless sharpness on text, receipts, and UI wireframes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I download just one page or all pages as a ZIP?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Both! After converting, click any page card to preview full-size and download that single page, or click Download All (Zip) to grab every page at once."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are my PDF files uploaded during image conversion?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Rendering uses PDF.js directly inside your browser so private documents never leave your device."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is PDF to JPG/PNG completely free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, GhostPDF converts multi-page PDFs to JPG or PNG for free without watermarks or sign-up."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <script defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script defer src="../js/utils.js"></script>
+    <script defer src="pdf-to-image.js"></script>
+</body>
+
+</html>
